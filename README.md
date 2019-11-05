@@ -5,3 +5,6 @@ Favor de no copiar sin avisar primero
 
 # MockProt 
 * Prototipos de las vistas para el SDS
+
+# app/flutterapp
+* App (Todavía en Prototipo)
