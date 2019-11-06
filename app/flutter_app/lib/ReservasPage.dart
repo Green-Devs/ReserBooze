@@ -8,6 +8,11 @@ class ReservasPage extends StatefulWidget {
 class _ReservasPageState extends State<ReservasPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Text('Reservas')
+      )
+    );
   }
 }

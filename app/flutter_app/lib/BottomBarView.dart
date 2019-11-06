@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/AntrosPage.dart';
+import 'package:flutter_app/HomePage.dart';
+import 'package:flutter_app/PerfilPage.dart';
+import 'package:flutter_app/ReservasPage.dart';
 
 class BottomBarView extends StatefulWidget {
   @override
@@ -12,7 +16,10 @@ class _BottomBarViewState extends State<BottomBarView> {
 
   //List of the widget. The index match the position of the icons
   final tabs = [
-
+    HomePage(),
+    ReservasPage(),
+    AntrosPage(),
+    PerfilPage()
   ];
 
   @override
@@ -20,7 +27,7 @@ class _BottomBarViewState extends State<BottomBarView> {
     return Scaffold(
 
       //Body has the the widget(screen)
-      body: Container(),
+      body: tabs[iCurrentIndex],
       bottomNavigationBar: BottomNavigationBar(
         //It says the index of the icon
         currentIndex: iCurrentIndex,
