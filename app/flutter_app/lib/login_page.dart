@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
+import 'BottomBarView.dart';
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
 
@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => BottomBarView()),
         );
       },
       padding: EdgeInsets.all(12),

@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class BottomBarView extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _BottomBarViewState createState() => _BottomBarViewState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _BottomBarViewState extends State<BottomBarView> {
 
+  //Index of the current selected tab
   int iCurrentIndex = 0;
+
+  //List of the widget. The index match the position of the icons
+  final tabs = [
+
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
+      //Body has the the widget(screen)
       body: Container(),
       bottomNavigationBar: BottomNavigationBar(
         //It says the index of the icon
@@ -20,6 +27,10 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         iconSize: 25,
         backgroundColor: Colors.white,
+        //The size of the font when you click on it
+          selectedFontSize: 15,
+        //The size of the font when the item is unclicked
+          unselectedFontSize: 12,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
