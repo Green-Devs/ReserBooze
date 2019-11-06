@@ -8,6 +8,6 @@ class AntrosPage extends StatefulWidget {
 class _AntrosPageState extends State<AntrosPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

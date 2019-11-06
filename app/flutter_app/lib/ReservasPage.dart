@@ -8,6 +8,6 @@ class ReservasPage extends StatefulWidget {
 class _ReservasPageState extends State<ReservasPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }
