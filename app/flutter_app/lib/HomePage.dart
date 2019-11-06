@@ -17,6 +17,9 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         //It says the index of the icon
         currentIndex: iCurrentIndex,
+        type: BottomNavigationBarType.fixed,
+        iconSize: 25,
+        backgroundColor: Colors.white,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
