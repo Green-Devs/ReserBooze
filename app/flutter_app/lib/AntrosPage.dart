@@ -8,17 +8,14 @@ class AntrosPage extends StatefulWidget {
 
 class _AntrosPageState extends State<AntrosPage> {
   final List<Antro> antroList= [
-  Antro("Avra", "8:00PM", "3:00AM", "desc", "assets/avra.jpg", "10/10"),
+    Antro("Strana", "10:00PM", "5:00AM", "desc", "assets/strana.jpg", "10/10"),
+    Antro("Avra", "8:00PM", "3:00AM", "desc", "assets/avra.jpg", "10/10"),
     Antro("La Santa", "9:00PM", "3:33AM", "desc", "assets/lasanta.jpg", "10/10"),
-    Antro("Pepper", "8:30PM", "4:00AM", "desc", "assets/pepper.jpg", "10/10"),
-    Antro("Strana", "10:00PM", "5:00AM", "desc", "assets/strana.jpg", "10/10")
+    Antro("Pepper", "8:30PM", "4:00AM", "desc", "assets/pepper.jpg", "10/10")
   ];
-
 
   @override
   Widget build(BuildContext context) {
-
-
 
     return Container(
       child: new ListView.builder(
@@ -31,7 +28,6 @@ class _AntrosPageState extends State<AntrosPage> {
     );
   }
 
-
   Widget buildTripCard(BuildContext context, int index) {
     final antro = antroList[index];
     return new Container(
@@ -41,15 +37,24 @@ class _AntrosPageState extends State<AntrosPage> {
           child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom:4.0),
+                  padding: const EdgeInsets.only(top: 1.0, bottom: 1.0),
+                  child: Row(children: <Widget> [
+                    Container(
+                      width: 320.0,
+                      height: 250.0,
+                      child: Image.asset(antro.getPhotoPath())
+                    )
+                  ])
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 1.0, bottom:4.0),
                   child: Row(children: <Widget> [
                     Text(antro.getName(), style: TextStyle(fontSize: 25.0)),
                     Spacer()
                   ]
                   ),
-
                 ),
-
 
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
@@ -60,7 +65,6 @@ class _AntrosPageState extends State<AntrosPage> {
                   ),
                 ),
 
-
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(children: <Widget>[
@@ -69,8 +73,6 @@ class _AntrosPageState extends State<AntrosPage> {
                   ],
                   ),
                 ),
-
-
               ]
           ),
         ),

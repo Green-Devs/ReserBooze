@@ -28,7 +28,7 @@ class Antro {
     return description;
   }
 
-  String getPhotoPhat() {
+  String getPhotoPath() {
     return photoPath;
   }
 
