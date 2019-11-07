@@ -18,19 +18,23 @@ class _AntrosPageState extends State<AntrosPage> {
         //itemCount will have the length of the list of antros
         itemCount: antroNames.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: Card(
-              child: Column(
-                children: <Widget>[
-                  Text(index.toString()),
-                  Text(antroNames[index])
-                ]
-              ),
-            ),
-          );
+          return buildTripCard(context, index);
         }
-
       )
+    );
+  }
+
+
+  Widget buildTripCard(BuildContext context, int index) {
+    return new Container(
+      child: Card(
+        child: Column(
+            children: <Widget>[
+              Text(index.toString()),
+              Text(antroNames[index])
+            ]
+        ),
+      ),
     );
   }
 }
