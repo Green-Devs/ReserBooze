@@ -33,13 +33,46 @@ class _AntrosPageState extends State<AntrosPage> {
 
 
   Widget buildTripCard(BuildContext context, int index) {
+    final antro = antroList[index];
     return new Container(
       child: Card(
-        child: Column(
-            children: <Widget>[
-              Text(index.toString()),
-              Text(antroNames[index])
-            ]
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom:4.0),
+                  child: Row(children: <Widget> [
+                    Text(antro.getName(), style: TextStyle(fontSize: 25.0)),
+                    Spacer()
+                  ]
+                  ),
+
+                ),
+
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
+                  child: Row(children: <Widget>[
+                    Text(antro.getStartHour() + "-" + antro.getEndHour()),
+                    Spacer()
+                  ],
+                  ),
+                ),
+
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  child: Row(children: <Widget>[
+                    Text(antro.getScore()),
+                    Spacer()
+                  ],
+                  ),
+                ),
+
+
+              ]
+          ),
         ),
       ),
     );
