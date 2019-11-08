@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'entities/Antro.dart';
+import 'AntroDetailView.dart';
 
 class AntrosPage extends StatefulWidget {
   @override
@@ -14,6 +15,8 @@ class _AntrosPageState extends State<AntrosPage> {
     Antro("Pepper", "8:30PM", "4:00AM", "desc", "assets/pepper.jpg", "10/10")
   ];
 
+  Antro currentAntro;
+
   @override
   Widget build(BuildContext context) {
 
@@ -22,7 +25,16 @@ class _AntrosPageState extends State<AntrosPage> {
         //itemCount will have the length of the list of antros
         itemCount: antroList.length,
         itemBuilder: (BuildContext context, int index) {
-          return buildTripCard(context, index);
+          return GestureDetector(
+            child: buildTripCard(context, index),
+            onTap: () {
+              currentAntro = antroList[index];
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AntroDetailView()),
+              );
+            }
+          );
         }
       )
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'entities/Antro.dart';
 
 class AntroDetailView extends StatefulWidget {
   @override
@@ -8,6 +9,9 @@ class AntroDetailView extends StatefulWidget {
 class _AntroDetailViewState extends State<AntroDetailView> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center()
+    );
   }
 }
