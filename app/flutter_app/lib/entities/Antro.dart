@@ -1,5 +1,12 @@
 /**
- * La clase antro
+ * Antro.dart
+ * versión 1.0
+ *
+ * La clase Antro corresponde al componente 3.2 especificada en el SDS,
+ * donde se puede encontrar una descripción más detallada de la clase.
+ * Su función principal es guardar datos que todo antro debe tener al
+ * formar parte de nuestra aplicación. Adicional a lo especificado en el
+ * SDS, se agregaron funciones extras en esta etapa de implementación
  */
 
 
@@ -11,7 +18,13 @@ class Antro {
   String photoPath;
   double puntaje;
 
+  /**
+   * Constructor de la clase antro. Dart permite realizar constructores
+   * con solo poner las variables del objeto en los parámetros
+   */
   Antro(this.nombre, this.tiempoApertura, this.tiempoLimite, this.descripcion, this.photoPath, this.puntaje);
+
+  //getters
 
   String getNombre(){
     return nombre;
@@ -37,6 +50,12 @@ class Antro {
     return puntaje;
   }
 
+  String getPuntajeFormato(){
+    return (this.puntaje.toString() + " / 10.0");
+  }
+
+  //setters
+
   void setNombre(String name){
     this.nombre = name;
   }
@@ -59,9 +78,5 @@ class Antro {
 
   void setPuntaje(double score) {
     this.puntaje = score;
-  }
-
-  String getPuntajeFormato(){
-    return (this.puntaje.toString() + " / 10.0");
   }
 }

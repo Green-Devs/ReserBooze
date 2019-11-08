@@ -66,7 +66,13 @@ class _BottomBarViewState extends State<BottomBarView> {
 
         //It is called every time an item is tapped.
           //Index is the one that was tapped
-        onTap:(index){
+
+          /**
+           * Este código de onTap es llamado cada vez
+           * que se hace click en un elemento de la barra de
+           * navegación.
+           */
+          onTap:(index){
           setState(() {
             currentIndex = index;
           });

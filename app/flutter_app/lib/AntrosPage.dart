@@ -1,3 +1,16 @@
+/**
+ * AntrosPage.dart
+ * versión 1.0
+ *
+ * AntrosPage cubre el caso detallado RF01: Ver lista de antros,
+ * el cual está especificado en el SDS.
+ *
+ * Debido al tiempo que se nos otorgó para realizar el proyecto,
+ * este no cuenta con una base de datos, es un prototipo de alta fidelidad.
+ * Sin embargo esto sirve como "Controlador de antros", el cual está
+ * especificado en algunos casos de uso.
+ */
+
 import 'package:flutter/material.dart';
 import 'entities/Antro.dart';
 import 'AntroDetailView.dart';
@@ -8,7 +21,10 @@ class AntrosPage extends StatefulWidget {
 }
 
 class _AntrosPageState extends State<AntrosPage> {
+  //Para no escribir lo mismo 4 veces hice un string
   static final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
+ //lista de antros
   final List<Antro> antroList= [
     Antro("Strana", "10:00PM", "5:00AM", loremIpsum, "assets/strana.jpg", 10),
     Antro("Avra", "8:00PM", "3:00AM", loremIpsum, "assets/avra.jpg", 8.9),
@@ -16,11 +32,13 @@ class _AntrosPageState extends State<AntrosPage> {
     Antro("Pepper", "8:30PM", "4:00AM", loremIpsum, "assets/pepper.jpg", 9.5)
   ];
 
+  //Objeto que será enviado si el usuario hace click en un antro
   Antro currentAntro;
 
   @override
   Widget build(BuildContext context) {
 
+    //Este container tiene una lista que detecta clicks
     return Container(
       child: new ListView.builder(
         //itemCount will have the length of the list of antros
@@ -28,8 +46,11 @@ class _AntrosPageState extends State<AntrosPage> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: buildTripCard(context, index),
+            //Si el usuario hace click en un elemento
             onTap: () {
+              //Guarda el antro en esa posición
               currentAntro = antroList[index];
+              //ve a la vista detallada del antro al que se le hizo click
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AntroDetailView(antro:currentAntro)),
@@ -41,6 +62,10 @@ class _AntrosPageState extends State<AntrosPage> {
     );
   }
 
+  /**
+   * Este es el código necesario para construir una vista para
+   * un antro. Cuenta con una foto, su nombre, horario y puntaje
+   */
   Widget buildTripCard(BuildContext context, int index) {
     final antro = antroList[index];
     return new Container(
@@ -49,6 +74,7 @@ class _AntrosPageState extends State<AntrosPage> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
               children: <Widget>[
+                //Este child del widget contiene la foto del antro y regula las dimensiones
                 Padding(
                   padding: const EdgeInsets.only(top: 1.0, bottom: 1.0),
                   child: Row(children: <Widget> [
@@ -60,6 +86,7 @@ class _AntrosPageState extends State<AntrosPage> {
                   ])
                 ),
 
+                //Este child contiene el nombre del antro y le da formato
                 Padding(
                   padding: const EdgeInsets.only(top: 1.0, bottom:4.0),
                   child: Row(children: <Widget> [
@@ -69,6 +96,7 @@ class _AntrosPageState extends State<AntrosPage> {
                   ),
                 ),
 
+                //Este child contiene el horario incluyendo apertura y cierre
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
                   child: Row(children: <Widget>[
@@ -78,6 +106,7 @@ class _AntrosPageState extends State<AntrosPage> {
                   ),
                 ),
 
+                //Este child contiene el puntaje del antro
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(children: <Widget>[
