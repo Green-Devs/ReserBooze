@@ -1,3 +1,16 @@
+/**
+ * HomePage.dart
+ * versión 1.0
+ *
+ * HomePage cubre el caso detallado RF06: Ver promociones,
+ * el cual está especificado en el SDS.
+ *
+ * Debido al tiempo que se nos otorgó para realizar el proyecto,
+ * este no cuenta con una base de datos, es un prototipo de alta fidelidad.
+ * Sin embargo esto sirve como "Controlador de promociones", el cual está
+ * especificado en algunos casos de uso.
+ */
+
 import 'package:flutter/material.dart';
 import 'entities/Antro.dart';
 import 'entities/Promo.dart';
@@ -9,6 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  //lista de antros
   static final List<Antro> antroList= [
     Antro("Strana", "10:00PM", "5:00AM", loremIpsum, "assets/strana.jpg", 10),
     Antro("Avra", "8:00PM", "3:00AM", loremIpsum, "assets/avra.jpg", 8.9),
@@ -16,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     Antro("Pepper", "8:30PM", "4:00AM", loremIpsum, "assets/pepper.jpg", 9.5)
   ];
 
+  //Lista de promociones
   final List<Promo> promoList = [
     Promo(antroList[3], "8:00PM", "12:00AM", "MUJERES TIENEN 2X1 EN BEBIDAS"),
     Promo(antroList[1], "10:00PM", "3:00AM", "50% DE DESCUENTO EN TEQUILA!"),
@@ -36,6 +51,10 @@ class _HomePageState extends State<HomePage> {
         )
     );
   }
+  /**
+   * Este es el código necesario para construir una promocion para
+   * un antro. Cuenta con una foto, su nombre, horario y la promocion
+   */
 
   Widget buildTripCard(BuildContext context, int index) {
     final promo = promoList[index];
@@ -47,6 +66,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Padding(
                     padding: const EdgeInsets.only(top: 1.0, bottom: 1.0),
+                    //Este child del widget contiene la foto del antro y regula las dimensiones
                     child: Row(children: <Widget> [
                       Container(
                           width: 320.0,
@@ -56,6 +76,7 @@ class _HomePageState extends State<HomePage> {
                     ])
                 ),
 
+                //Este child contiene el nombre del antro y le da formato
                 Padding(
                   padding: const EdgeInsets.only(top: 1.0, bottom:4.0),
                   child: Row(children: <Widget> [
@@ -65,6 +86,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
+                //Este child contiene el horario de la promocion
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
                   child: Row(children: <Widget>[
