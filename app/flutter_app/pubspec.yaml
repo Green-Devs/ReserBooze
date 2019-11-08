@@ -38,6 +38,7 @@ flutter:
 
   assets:
     - assets/logo.png
+    - assets/profilepic.png
     - assets/avra.jpg
     - assets/lasanta.jpg
     - assets/pepper.jpg
