@@ -63,10 +63,6 @@ class _BottomBarViewState extends State<BottomBarView> {
             backgroundColor: Colors.blue
           )
         ],
-
-        //It is called every time an item is tapped.
-          //Index is the one that was tapped
-
           /**
            * Este código de onTap es llamado cada vez
            * que se hace click en un elemento de la barra de
