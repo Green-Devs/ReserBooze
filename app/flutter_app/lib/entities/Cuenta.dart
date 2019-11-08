@@ -7,8 +7,7 @@ class Cuenta {
   DateTime fechaNacimiento;
   int numeroIne;
   String fotoCuenta;
-
-
+  
   Cuenta(this.nombre, this.correo, this.contrasena, this.fechaNacimiento, this.numeroIne, this.fotoCuenta);
 
 
