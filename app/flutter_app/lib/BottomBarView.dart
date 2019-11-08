@@ -1,3 +1,11 @@
+/**
+ * BottomBarView.dart
+ * version 1.0
+ *
+ * Este archivo maneja toda la lógica de el cambio de widgets(pantallas)
+ * entre las 4 pantallas principales: Home, reservaciones, antros y perfil
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/AntrosPage.dart';
 import 'package:flutter_app/HomePage.dart';
