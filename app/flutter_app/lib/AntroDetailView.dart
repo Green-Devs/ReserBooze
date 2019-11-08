@@ -1,10 +1,30 @@
+/**
+ * AntroDetailView.dart
+ * versión 1.0
+ *
+ * Esta clase muestra una descripción más amplia del antro.
+ * En específico: su nombre, una foto, una descripción, horario,
+ * y puntaje del 1 al 10.
+ *
+ * Este archivo es un avance del caso de uso "reservar mesa", su fecha
+ * de entrega es en un sprint posterior, por lo que su funcionalidad y
+ * componente en el SDS no están ni deberían estar completos en este momento.
+ *
+ */
+
+
 import 'package:flutter/material.dart';
 import 'entities/Antro.dart';
 
 class AntroDetailView extends StatefulWidget {
-
+  //Aquí recibiremos el objeto antro que nos pasará la lista de antros
  final Antro antro;
 
+ /**
+  * Constructor modificado, la llave "key" siempre se pasa por defecto,
+  * también se le pone un segundo parámetro cuyo valor va a almacenarse
+  * en el espacio designado para el objeto "antro"
+  */
  AntroDetailView({Key key, this.antro}) : super(key: key);
 
   @override
@@ -15,14 +35,17 @@ class _AntroDetailViewState extends State<AntroDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    //Obteniendo el antro del widget
     Antro antro = widget.antro;
 
+    //Código para hacer visible la imagen del antro
     final antroImage = Container(
       width: 320.0,
       height: 230.0,
       child: Image.asset(antro.getPhotoPath())
     );
 
+    //Código de la UI del botón para hacer reservación
     final reservationButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
@@ -35,6 +58,7 @@ class _AntroDetailViewState extends State<AntroDetailView> {
       ),
     );
 
+    //Este Scaffold contiene toda la vista lista para ser desplegada al usuario
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
