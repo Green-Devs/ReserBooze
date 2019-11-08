@@ -12,7 +12,7 @@ class BottomBarView extends StatefulWidget {
 class _BottomBarViewState extends State<BottomBarView> {
 
   //Index of the current selected tab
-  int iCurrentIndex = 0;
+  int currentIndex = 0;
 
   //List of the widget. The index match the position of the icons
   final tabs = [
@@ -27,10 +27,10 @@ class _BottomBarViewState extends State<BottomBarView> {
     return Scaffold(
 
       //Body has the the widget(screen)
-      body: tabs[iCurrentIndex],
+      body: tabs[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         //It says the index of the icon
-        currentIndex: iCurrentIndex,
+        currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
         iconSize: 25,
         backgroundColor: Colors.white,
@@ -68,7 +68,7 @@ class _BottomBarViewState extends State<BottomBarView> {
           //Index is the one that was tapped
         onTap:(index){
           setState(() {
-            iCurrentIndex = index;
+            currentIndex = index;
           });
         }
       ),
