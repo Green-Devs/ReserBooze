@@ -20,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
       )
     );
 
-
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
@@ -33,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
         )
       ),
     );
-
 
     final password = TextFormField(
       autofocus: false,
@@ -48,9 +46,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-
   final loginButton = Padding(
-    padding: EdgeInsets.symmetric(vertical: 16.0),
+    padding: EdgeInsets.symmetric(vertical: 1.0),
     child: RaisedButton(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
@@ -67,12 +64,22 @@ class _LoginPageState extends State<LoginPage> {
     ),
   );
 
-
-    final forgotLabel = FlatButton(
-      child: Text('Forgot password?', style: TextStyle(color: Colors.black54)),
-      onPressed: forgotPressed()
+    final createAccountButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 1.0),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        padding: EdgeInsets.all(12),
+        color: Colors.lightBlueAccent,
+        child: Text('Crear cuenta', style : TextStyle(color: Colors.white)),
+      ),
     );
 
+    final createAccountLabel = FlatButton(
+        child: Text('¿No tienes cuenta?', style: TextStyle(color: Colors.black54)),
+        onPressed: () {}
+    );
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -89,17 +96,12 @@ class _LoginPageState extends State<LoginPage> {
             password,
             SizedBox(height: 24.0),
             loginButton,
-            forgotLabel
+            SizedBox(height: 24.0),
+            createAccountLabel,
+            createAccountButton,
           ],
         ),
       ),
     );
   }
-}
-
-login() {
-}
-
-forgotPressed() {
-
 }

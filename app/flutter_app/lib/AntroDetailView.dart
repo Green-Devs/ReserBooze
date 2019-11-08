@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'entities/Antro.dart';
 
 class AntroDetailView extends StatefulWidget {
+
  final Antro antro;
 
  AntroDetailView({Key key, this.antro}) : super(key: key);
@@ -34,20 +35,19 @@ class _AntroDetailViewState extends State<AntroDetailView> {
       ),
     );
 
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
           padding: EdgeInsets.only(left: 24.0, right: 24.0, top: 40.0),
           children: <Widget>[
-            Text(antro.getName(), style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold)),
+            Text(antro.getNombre(), style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold)),
             antroImage,
-            Text(antro.getDescription(), style: TextStyle(fontSize: 16)),
+            Text(antro.getDescripcion(), style: TextStyle(fontSize: 16)),
             SizedBox(height: 24.0),
-            Text("Horario: " + antro.getStartHour() + "-" + antro.getEndHour()),
+            Text("Horario: " + antro.getTiempoApertura() + " - " + antro.getTiempoLimite()),
             SizedBox(height: 16.0),
-            Text("Puntaje: " + antro.getScore()),
+            Text("Puntaje: " + antro.getPuntajeFormato()),
             SizedBox(height: 48.0),
             reservationButton
           ]

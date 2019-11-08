@@ -1,62 +1,67 @@
-import 'package:flutter/material.dart';
+/**
+ * La clase antro
+ */
+
 
 class Antro {
-  String name;
-  String startHour;
-  String endHour;
-  String description;
+  String nombre;
+  String tiempoApertura;
+  String tiempoLimite;
+  String descripcion;
   String photoPath;
-  String score;
+  double puntaje;
 
+  Antro(this.nombre, this.tiempoApertura, this.tiempoLimite, this.descripcion, this.photoPath, this.puntaje);
 
-  Antro(this.name, this.startHour, this.endHour, this.description, this.photoPath, this.score);
-
-
-  String getName(){
-    return name;
+  String getNombre(){
+    return nombre;
   }
 
-  String getStartHour(){
-    return startHour;
+  String getTiempoApertura(){
+    return tiempoApertura;
   }
 
-  String getEndHour() {
-    return endHour;
+  String getTiempoLimite() {
+    return tiempoLimite;
   }
 
-  String getDescription() {
-    return description;
+  String getDescripcion() {
+    return descripcion;
   }
 
   String getPhotoPath() {
     return photoPath;
   }
 
-  String getScore() {
-    return score;
+  double getPuntaje() {
+    return puntaje;
   }
 
-  void setName(String name){
-    this.name = name;
+  void setNombre(String name){
+    this.nombre = name;
   }
 
-  void setStartHour(String startHour) {
-    this.startHour = startHour;
+  void setTiempoApertura(String startHour) {
+    this.tiempoApertura = startHour;
   }
 
-  void setEndHour(String endHour) {
-    this.endHour = endHour;
+  void setTiempoLimite(String endHour) {
+    this.tiempoLimite = endHour;
   }
 
-  void setDescription(String description) {
-    this.description = description;
+  void setDescripcion(String description) {
+    this.descripcion = description;
   }
 
   void setPhotoPhat(String photoPath) {
     this.photoPath = photoPath;
   }
 
-  void setScore(String score) {
-    this.score = score;
+  void setPuntaje(double score) {
+    this.puntaje = score;
+  }
+
+  String getPuntajeFormato(){
+    return (this.puntaje.toString() + " / 10.0");
   }
 }
