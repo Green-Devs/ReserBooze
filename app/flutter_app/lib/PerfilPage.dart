@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'entities/Cuenta.dart';
 
 class PerfilPage extends StatefulWidget {
   @override
@@ -8,12 +9,14 @@ class PerfilPage extends StatefulWidget {
 class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
+    final testUser = Cuenta('Pedro García', 'pedro.garcia95@gmail.com', '123', DateTime.now(), 12345, 'assets/profilepic.png');
+
     final profilePic = Hero(
         tag: 'hero',
         child: CircleAvatar(
             backgroundColor:  Colors.transparent,
             radius: 80.0,
-            child: Image.asset('assets/profilepic.png')
+            child: Image.asset(testUser.getFotoCuenta())
         )
     );
 
@@ -22,7 +25,7 @@ class _PerfilPageState extends State<PerfilPage> {
         text: 'Nombre:  ',
         style: DefaultTextStyle.of(context).style,
         children: <TextSpan>[
-          TextSpan(text: 'Pedro García', style: TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(text: testUser.getNombre(), style: TextStyle(fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -32,7 +35,7 @@ class _PerfilPageState extends State<PerfilPage> {
         text: 'email:  ',
         style: DefaultTextStyle.of(context).style,
         children: <TextSpan>[
-          TextSpan(text: 'pedro.garcia95@gmail.com', style: TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(text: testUser.getCorreo(), style: TextStyle(fontWeight: FontWeight.bold)),
         ],
       ),
     );
