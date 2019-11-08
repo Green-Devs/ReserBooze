@@ -1,3 +1,12 @@
+/**
+ * Cuenta.dart
+ * Version 1.0
+ *
+ * Cuenta es el componente 3.3, más información detallada puede ser encontrada
+ * en el SDS.
+ * La clase sirve para modelar la información de cada usuario.
+ */
+
 import 'package:flutter/material.dart';
 
 class Cuenta {
