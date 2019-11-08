@@ -31,7 +31,7 @@ class _AntrosPageState extends State<AntrosPage> {
               currentAntro = antroList[index];
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AntroDetailView()),
+                MaterialPageRoute(builder: (context) => AntroDetailView(antro:currentAntro)),
               );
             }
           );
