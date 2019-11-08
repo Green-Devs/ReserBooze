@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'entities/Antro.dart';
+import 'AntroDetailView.dart';
 
 class AntrosPage extends StatefulWidget {
   @override
@@ -7,12 +8,15 @@ class AntrosPage extends StatefulWidget {
 }
 
 class _AntrosPageState extends State<AntrosPage> {
+  static final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
   final List<Antro> antroList= [
-    Antro("Strana", "10:00PM", "5:00AM", "desc", "assets/strana.jpg", "10/10"),
-    Antro("Avra", "8:00PM", "3:00AM", "desc", "assets/avra.jpg", "10/10"),
-    Antro("La Santa", "9:00PM", "3:33AM", "desc", "assets/lasanta.jpg", "10/10"),
-    Antro("Pepper", "8:30PM", "4:00AM", "desc", "assets/pepper.jpg", "10/10")
+    Antro("Strana", "10:00PM", "5:00AM", loremIpsum, "assets/strana.jpg", "10/10"),
+    Antro("Avra", "8:00PM", "3:00AM", loremIpsum, "assets/avra.jpg", "10/10"),
+    Antro("La Santa", "9:00PM", "3:33AM", loremIpsum, "assets/lasanta.jpg", "10/10"),
+    Antro("Pepper", "8:30PM", "4:00AM", loremIpsum, "assets/pepper.jpg", "10/10")
   ];
+
+  Antro currentAntro;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,16 @@ class _AntrosPageState extends State<AntrosPage> {
         //itemCount will have the length of the list of antros
         itemCount: antroList.length,
         itemBuilder: (BuildContext context, int index) {
-          return buildTripCard(context, index);
+          return GestureDetector(
+            child: buildTripCard(context, index),
+            onTap: () {
+              currentAntro = antroList[index];
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AntroDetailView(antro:currentAntro)),
+              );
+            }
+          );
         }
       )
     );
@@ -59,7 +72,7 @@ class _AntrosPageState extends State<AntrosPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0, bottom: 8.0),
                   child: Row(children: <Widget>[
-                    Text(antro.getStartHour() + "-" + antro.getEndHour()),
+                    Text("Horario: " + antro.getStartHour() + "-" + antro.getEndHour()),
                     Spacer()
                   ],
                   ),
@@ -68,7 +81,7 @@ class _AntrosPageState extends State<AntrosPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(children: <Widget>[
-                    Text(antro.getScore()),
+                    Text("Puntaje: " + antro.getScore()),
                     Spacer()
                   ],
                   ),
