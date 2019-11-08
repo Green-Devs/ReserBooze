@@ -10,10 +10,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
   static final List<Antro> antroList= [
-    Antro("Strana", "10:00PM", "5:00AM", loremIpsum, "assets/strana.jpg", "10/10"),
-    Antro("Avra", "8:00PM", "3:00AM", loremIpsum, "assets/avra.jpg", "10/10"),
-    Antro("La Santa", "9:00PM", "3:33AM", loremIpsum, "assets/lasanta.jpg", "10/10"),
-    Antro("Pepper", "8:30PM", "4:00AM", loremIpsum, "assets/pepper.jpg", "10/10")
+    Antro("Strana", "10:00PM", "5:00AM", loremIpsum, "assets/strana.jpg", 10),
+    Antro("Avra", "8:00PM", "3:00AM", loremIpsum, "assets/avra.jpg", 8.9),
+    Antro("La Santa", "9:00PM", "3:33AM", loremIpsum, "assets/lasanta.jpg", 9.3),
+    Antro("Pepper", "8:30PM", "4:00AM", loremIpsum, "assets/pepper.jpg", 9.5)
   ];
 
   final List<Promo> promoList = [
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 1.0, bottom:4.0),
                   child: Row(children: <Widget> [
-                    Text(promo.getAntro().getName(), style: TextStyle(fontSize: 25.0)),
+                    Text(promo.getAntro().getNombre(), style: TextStyle(fontSize: 25.0)),
                     Spacer()
                   ]
                   ),
