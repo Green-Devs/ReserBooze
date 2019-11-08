@@ -15,8 +15,11 @@ class Antro {
   String tiempoApertura;
   String tiempoLimite;
   String descripcion;
-  String photoPath;
   double puntaje;
+  //photoPath es la fotografía principal
+  String photoPath;
+  //fotos es una lista de fotos(sus direcciones) secundarias y opcionales
+  List<String> fotos;
 
   /**
    * Constructor de la clase antro. Dart permite realizar constructores
@@ -78,5 +81,25 @@ class Antro {
 
   void setPuntaje(double score) {
     this.puntaje = score;
+  }
+
+  //Métodos que no son getters o setters
+
+  //para agregar una foto a la lista de fotos opcionales
+  void pushFoto(String foto) {
+    fotos.add(foto);
+  }
+
+  //Te dice si se pudo eliminar la foto opcional en el index "index"
+  //Index es un número cuya cuenta empezó en 0 como primer elemento
+  bool deleteFoto(int index) {
+    bool judge = false;
+
+    //Si el index es válido elimina la foto
+    if(index < fotos.length){
+      judge = !judge;
+      fotos.removeAt(index);
+    }
+    return judge;
   }
 }
