@@ -20,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
       )
     );
 
-
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
@@ -34,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-
     final password = TextFormField(
       autofocus: false,
       initialValue: '',
@@ -47,7 +45,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
       ),
     );
-
 
   final loginButton = Padding(
     padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -67,10 +64,9 @@ class _LoginPageState extends State<LoginPage> {
     ),
   );
 
-
     final forgotLabel = FlatButton(
       child: Text('Forgot password?', style: TextStyle(color: Colors.black54)),
-      onPressed: forgotPressed()
+      onPressed: () {}
     );
 
     return Scaffold(
@@ -94,11 +90,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-login() {
-}
-
-forgotPressed() {
-
 }
