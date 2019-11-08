@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Promo> promoList = [
     Promo(antroList[3], "8:00PM", "12:00AM", "MUJERES TIENEN 2X1 EN BEBIDAS"),
-    Promo(antroList[1], "10:00PM", "3:00AM", "SI RESERVAS UNA MESA, RECIBE UNA CUBETA GRATIS"),
+    Promo(antroList[1], "10:00PM", "3:00AM", "50% DE DESCUENTO EN TEQUILA!"),
   ];
 
   @override
