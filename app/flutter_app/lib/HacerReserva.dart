@@ -20,17 +20,12 @@ class _HacerReservaState extends State<HacerReserva> {
 
     List<Antro> antroList = widget.antroList;
 
-    //Si el usuario viene de ver un antro en específico, pon esta opción
-    if(widget.antroSelected!= null) {
+    if(widget.antroSelected != null) {
       antroName = widget.antroSelected;
     }
 
     List<DropdownMenuItem<String>> antroMenu = loadAntroData(antroList);
 
-    antroMenu.add(new DropdownMenuItem(
-        child: Text("fefe"),
-        value: "ff"
-    ));
 
     final logo = Hero(
         tag: 'hero',
@@ -60,7 +55,6 @@ class _HacerReservaState extends State<HacerReserva> {
                   onChanged: (String value) {
                     setState(() {
                       antroName = value;
-                      print(antroName);
                     });
                   },
                 )
