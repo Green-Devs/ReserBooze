@@ -15,17 +15,19 @@
 
 import 'package:flutter/material.dart';
 import 'entities/Antro.dart';
+import 'HacerReserva.dart';
 
 class AntroDetailView extends StatefulWidget {
   //Aquí recibiremos el objeto antro que nos pasará la lista de antros
- final Antro antro;
+  final List<Antro> antroList;
+ int antroIndex;
 
  /**
   * Constructor modificado, la llave "key" siempre se pasa por defecto,
   * también se le pone un segundo parámetro cuyo valor va a almacenarse
   * en el espacio designado para el objeto "antro"
   */
- AntroDetailView({Key key, this.antro}) : super(key: key);
+ AntroDetailView({Key key, this.antroList, this.antroIndex}) : super(key: key);
 
   @override
   _AntroDetailViewState createState() => _AntroDetailViewState();
@@ -36,7 +38,7 @@ class _AntroDetailViewState extends State<AntroDetailView> {
   @override
   Widget build(BuildContext context) {
     //Obteniendo el antro del widget
-    Antro antro = widget.antro;
+    Antro antro = widget.antroList[widget.antroIndex];
 
     //Código para hacer visible la imagen del antro
     final antroImage = Container(
@@ -55,6 +57,12 @@ class _AntroDetailViewState extends State<AntroDetailView> {
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
         child: Text('Separar mesa', style : TextStyle(color: Colors.white)),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HacerReserva(antroList: widget.antroList, antroSelected: antro.getNombre())),
+          );
+        },
       ),
     );
 
@@ -79,4 +87,6 @@ class _AntroDetailViewState extends State<AntroDetailView> {
       )
     );
   }
+
+
 }

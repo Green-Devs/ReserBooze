@@ -53,7 +53,7 @@ class _AntrosPageState extends State<AntrosPage> {
               //ve a la vista detallada del antro al que se le hizo click
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AntroDetailView(antro:currentAntro)),
+                MaterialPageRoute(builder: (context) => AntroDetailView(antroList:antroList, antroIndex: index)),
               );
             }
           );
