@@ -60,7 +60,7 @@ class _AntroDetailViewState extends State<AntroDetailView> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HacerReserva(antroList: widget.antroList, antroSelected: antro.getNombre())),
+            MaterialPageRoute(builder: (context) => HacerReserva(antroList: widget.antroList, antroSelected: antro)),
           );
         },
       ),

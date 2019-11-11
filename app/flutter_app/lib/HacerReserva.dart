@@ -6,7 +6,8 @@ import 'entities/Antro.dart';
 class HacerReserva extends StatefulWidget {
 
   final List<Antro> antroList;
-  String antroSelected;
+  Antro antroSelected;
+
 
   HacerReserva({Key key, this.antroList, this.antroSelected}) : super(key: key);
   @override
@@ -15,16 +16,18 @@ class HacerReserva extends StatefulWidget {
 
 class _HacerReservaState extends State<HacerReserva> {
   String antroName = null;
+  String hour = null;
   @override
   Widget build(BuildContext context) {
 
     List<Antro> antroList = widget.antroList;
 
     if(widget.antroSelected != null) {
-      antroName = widget.antroSelected;
+      antroName = widget.antroSelected.getNombre();
     }
 
     List<DropdownMenuItem<String>> antroMenu = loadAntroData(antroList);
+    List<DropdownMenuItem<String>> hours = loadHours(widget.antroSelected);
 
 
     final logo = Hero(
@@ -34,6 +37,18 @@ class _HacerReservaState extends State<HacerReserva> {
             radius: 48.0,
             child: Image.asset('assets/logo.png')
         )
+    );
+
+    final reservationButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 1.0),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        padding: EdgeInsets.all(12),
+        color: Colors.lightBlueAccent,
+        child: Text('Reservar!', style : TextStyle(color: Colors.white)),
+      ),
     );
 
     return Scaffold(
@@ -59,7 +74,26 @@ class _HacerReservaState extends State<HacerReserva> {
                   },
                 )
               ],
-            )
+            ),
+            SizedBox(height: 48),
+            Row(
+              children: <Widget>[
+                Text("Hora: "),
+                DropdownButton<String>(
+                  value: hour,
+                  items: hours,
+                  hint: Text("hora"),
+                  iconSize: 35,
+                  onChanged: (String value) {
+                    setState(() {
+                      hour = value;
+                    });
+                  },
+                )
+              ],
+            ),
+            SizedBox(height: 48),
+            reservationButton
           ],
         ),
       ),
@@ -74,6 +108,21 @@ class _HacerReservaState extends State<HacerReserva> {
         child: Text(antros[i].getNombre()),
         value: antros[i].getNombre()
       ));
+    }
+    return dataList;
+  }
+
+  List<DropdownMenuItem<String>> loadHours(Antro antro) {
+    List<DropdownMenuItem<String>> dataList = [];
+
+    for(int i = 10; i < 12; i++) {
+      for(int j = 0; j < 60; j+=15) {
+        String temp = (j >= 10) ? j.toString() : "0" + j.toString();
+        String hour = i.toString() +":" + temp;
+          dataList.add(new DropdownMenuItem(
+              child: Text(hour),
+              value: hour));
+      }
     }
     return dataList;
   }
