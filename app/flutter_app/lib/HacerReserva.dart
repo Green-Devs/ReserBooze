@@ -19,20 +19,18 @@ class _HacerReservaState extends State<HacerReserva> {
   String antroName = null;
   String hour = null;
   String date = null;
-  List<DropdownMenuItem<String>> antroMenu;
-  List<DropdownMenuItem<String>> hours;
-  List<DropdownMenuItem<String>> dates;
+  List<DropdownMenuItem<String>> antroMenu = [];
+  List<DropdownMenuItem<String>> hours = [];
+  List<DropdownMenuItem<String>> dates = [];
   @override
   Widget build(BuildContext context) {
-
-    List<Antro> antroList = widget.antroList;
 
     if(widget.antroSelected != null) {
       antroName = widget.antroSelected.getNombre();
     }
 
-    antroMenu = loadAntroData(antroList);
-    hours = loadHours(widget.antroSelected);
+    antroMenu = loadAntroData(widget.antroList);
+    hours = loadHours();
     dates = loadDates();
 
     final logo = Hero(
@@ -138,7 +136,7 @@ class _HacerReservaState extends State<HacerReserva> {
     return dataList;
   }
 
-  List<DropdownMenuItem<String>> loadHours(Antro antro) {
+  List<DropdownMenuItem<String>> loadHours() {
     List<DropdownMenuItem<String>> dataList = [];
 
     for(int i = 10; i < 12; i++) {
@@ -158,10 +156,10 @@ class _HacerReservaState extends State<HacerReserva> {
     List<String> dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
     for(int i = 0; i < 15; i++) {
-      String date = dias[i % dias.length] + " " + (i + 1).toString() + " de Diciembre";
+      String innerDate = dias[i % dias.length] + " " + (i + 1).toString() + " de Diciembre";
       dataList.add( new DropdownMenuItem(
-          child: Text(date),
-          value: date));
+          child: Text(innerDate),
+          value: innerDate));
     }
     return dataList;
   }
