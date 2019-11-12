@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => BottomBarView()),
+          MaterialPageRoute(builder: (context) => BottomBarView(currentIndex: 0,)),
         );
       },
       padding: EdgeInsets.all(12),

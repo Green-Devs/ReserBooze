@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'entities/Antro.dart';
+import 'package:flutter_app/BottomBarView.dart';
 
 
 class HacerReserva extends StatefulWidget {
@@ -52,6 +53,12 @@ class _HacerReservaState extends State<HacerReserva> {
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
         child: Text('Reservar!', style : TextStyle(color: Colors.white)),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BottomBarView(currentIndex: 1,)),
+          );
+        },
       ),
     );
 

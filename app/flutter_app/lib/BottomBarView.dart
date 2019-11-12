@@ -13,14 +13,20 @@ import 'package:flutter_app/PerfilPage.dart';
 import 'package:flutter_app/ReservasPage.dart';
 
 class BottomBarView extends StatefulWidget {
+
+  int calledWidget;
+  int currentIndex;
+  BottomBarView({Key key, this.currentIndex}) : super(key: key);
+
   @override
   _BottomBarViewState createState() => _BottomBarViewState();
 }
 
+
 class _BottomBarViewState extends State<BottomBarView> {
 
   //Index of the current selected tab
-  int currentIndex = 0;
+
 
   //List of the widget. The index match the position of the icons
   final tabs = [
@@ -32,13 +38,15 @@ class _BottomBarViewState extends State<BottomBarView> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
 
       //Body has the the widget(screen)
-      body: tabs[currentIndex],
+      body: tabs[widget.currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         //It says the index of the icon
-        currentIndex: currentIndex,
+        currentIndex: widget.currentIndex,
         type: BottomNavigationBarType.fixed,
         iconSize: 25,
         backgroundColor: Colors.white,
@@ -78,7 +86,7 @@ class _BottomBarViewState extends State<BottomBarView> {
            */
           onTap:(index){
           setState(() {
-            currentIndex = index;
+            widget.currentIndex = index;
           });
         }
       ),
