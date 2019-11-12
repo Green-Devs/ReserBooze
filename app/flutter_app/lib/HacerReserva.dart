@@ -17,6 +17,10 @@ class HacerReserva extends StatefulWidget {
 class _HacerReservaState extends State<HacerReserva> {
   String antroName = null;
   String hour = null;
+  String date = null;
+  List<DropdownMenuItem<String>> antroMenu;
+  List<DropdownMenuItem<String>> hours;
+  List<DropdownMenuItem<String>> dates;
   @override
   Widget build(BuildContext context) {
 
@@ -26,10 +30,9 @@ class _HacerReservaState extends State<HacerReserva> {
       antroName = widget.antroSelected.getNombre();
     }
 
-    List<DropdownMenuItem<String>> antroMenu = loadAntroData(antroList);
-    List<DropdownMenuItem<String>> hours = loadHours(widget.antroSelected);
-    List<DropdownMenuItem<String>> dates = loadDates();
-
+    antroMenu = loadAntroData(antroList);
+    hours = loadHours(widget.antroSelected);
+    dates = loadDates();
 
     final logo = Hero(
         tag: 'hero',
@@ -72,6 +75,21 @@ class _HacerReservaState extends State<HacerReserva> {
                     setState(() {
                       antroName = value;
                     });
+                  },
+                )
+              ],
+            ),
+            SizedBox(height: 48),
+            Row(
+              children: <Widget>[
+                Text("Día: "),
+                DropdownButton<String>(
+                  value: date,
+                  items: dates,
+                  hint: Text("día"),
+                  iconSize: 35,
+                  onChanged: (String value) {
+                    date = value;
                   },
                 )
               ],
@@ -134,7 +152,6 @@ class _HacerReservaState extends State<HacerReserva> {
 
     for(int i = 0; i < 15; i++) {
       String date = dias[i % dias.length] + " " + (i + 1).toString() + " de Diciembre";
-      print(date);
       dataList.add( new DropdownMenuItem(
           child: Text(date),
           value: date));
