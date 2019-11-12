@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'entities/Reserva.dart';
 
 class ReservasPage extends StatefulWidget {
+  List<Reserva> reservas = [];
   @override
   _ReservasPageState createState() => _ReservasPageState();
 }

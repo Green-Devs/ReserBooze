@@ -12,11 +12,15 @@ import 'package:flutter_app/HomePage.dart';
 import 'package:flutter_app/PerfilPage.dart';
 import 'package:flutter_app/ReservasPage.dart';
 
+import 'entities/Reserva.dart';
+
 class BottomBarView extends StatefulWidget {
 
   int calledWidget;
   int currentIndex;
-  BottomBarView({Key key, this.currentIndex}) : super(key: key);
+  Reserva reserva;
+  List<Reserva> reservas = new List<Reserva>();
+  BottomBarView({Key key, this.currentIndex, this.reserva, this.reservas}) : super(key: key);
 
   @override
   _BottomBarViewState createState() => _BottomBarViewState();
@@ -25,7 +29,6 @@ class BottomBarView extends StatefulWidget {
 
 class _BottomBarViewState extends State<BottomBarView> {
 
-  //Index of the current selected tab
 
 
   //List of the widget. The index match the position of the icons
@@ -39,6 +42,11 @@ class _BottomBarViewState extends State<BottomBarView> {
   @override
   Widget build(BuildContext context) {
 
+  if(widget.reserva != null) {
+    widget.reservas.add(widget.reserva);
+    print(widget.reserva.getAntroNombre());
+    widget.reserva = null;
+  }
 
     return Scaffold(
 
