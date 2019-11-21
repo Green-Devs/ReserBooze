@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'entities/Cuenta.dart';
+import 'login_page.dart';
 
 class PerfilPage extends StatefulWidget {
   @override
@@ -62,6 +63,25 @@ class _PerfilPageState extends State<PerfilPage> {
       ),
     );
 
+    //Código de la UI del botón para hacer logout
+    final logoutButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        padding: EdgeInsets.all(12),
+        color: Colors.lightBlueAccent,
+        child: Text('Cerrar sesión', style : TextStyle(color: Colors.white)),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+          );
+        },
+      ),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -73,7 +93,9 @@ class _PerfilPageState extends State<PerfilPage> {
               name,
               userEmail,
               fechaNacimiento,
-              credencialVerificada
+              credencialVerificada,
+              SizedBox(height: 48),
+              logoutButton
             ]
         )
       )
