@@ -14,6 +14,7 @@
 import 'package:flutter/material.dart';
 import 'entities/Reserva.dart';
 import 'entities/Antro.dart';
+import 'GlobalVariables.dart' as globals;
 
 class ReservasPage extends StatefulWidget {
   List<Reserva> reservasList = [];
@@ -41,7 +42,11 @@ class _ReservasPageState extends State<ReservasPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Reserva> reservasL = [Reserva("Avra", "10:00 PM", "5 de Diciembre")];
+    
+    for(Reserva reserva in globals.reservas){
+      reservasL.add(reserva);
+    }
+
     /* Futuro uso
     if (widget.newReserva !=  null) {
       reservasL.add(widget.newReserva);
@@ -101,7 +106,7 @@ class _ReservasPageState extends State<ReservasPage> {
                       Container(
                           width: 320.0,
                           height: 250.0,
-                          child: Image.asset(antroList[2].getPhotoPath())
+                          child: Image.asset(getAntroFromName(reserva.getAntroNombre()).getPhotoPath())
                       )
                     ])
                 ),
@@ -140,5 +145,17 @@ class _ReservasPageState extends State<ReservasPage> {
         ),
       ),
     );
+  }
+  
+  //Gives you the antro from its name
+  Antro getAntroFromName(String name) {
+    Antro antroSelected;
+    
+    for(Antro antro in antroList){
+      if(antro.getNombre() == name) {
+        antroSelected = antro;
+      }
+    }
+    return antroSelected;
   }
 }

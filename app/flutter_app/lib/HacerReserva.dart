@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'GlobalVariables.dart' as globals;
 import 'entities/Antro.dart';
 import 'entities/Reserva.dart';
 import 'package:flutter_app/BottomBarView.dart';
@@ -54,6 +54,7 @@ class _HacerReservaState extends State<HacerReserva> {
         child: Text('Reservar!', style : TextStyle(color: Colors.white)),
         onPressed: () {
           Reserva res = new Reserva(antroName, hour, date);
+          globals.reservas.add(res);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => BottomBarView(currentIndex: 1)),
