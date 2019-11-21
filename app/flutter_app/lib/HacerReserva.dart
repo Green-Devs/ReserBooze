@@ -56,7 +56,7 @@ class _HacerReservaState extends State<HacerReserva> {
           Reserva res = new Reserva(antroName, hour, date);
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => BottomBarView(currentIndex: 1, reserva: res)),
+            MaterialPageRoute(builder: (context) => BottomBarView(currentIndex: 1)),
           );
         },
       ),
