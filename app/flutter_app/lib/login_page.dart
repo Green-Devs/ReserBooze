@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'BottomBarView.dart';
+import 'CrearCuenta.dart';
 import 'GlobalVariables.dart' as globals;
 import 'entities/Cuenta.dart';
 class LoginPage extends StatefulWidget {
@@ -84,6 +85,14 @@ class _LoginPageState extends State<LoginPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CrearCuenta()
+            )
+          );
+        },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
         child: Text('Crear cuenta', style : TextStyle(color: Colors.white)),
