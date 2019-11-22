@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 import 'BottomBarView.dart';
+import 'GlobalVariables.dart' as globals;
+import 'entities/Cuenta.dart';
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
 
@@ -11,6 +14,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
 
+    addAccounts();
+
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
@@ -21,9 +29,9 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final email = TextFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      initialValue: '',
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -34,8 +42,8 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final password = TextFormField(
+      controller: passwordController,
       autofocus: false,
-      initialValue: '',
       obscureText: true,
       decoration: InputDecoration(
           hintText: 'Password',
@@ -53,10 +61,16 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(24),
       ),
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => BottomBarView(currentIndex: 0,)),
-        );
+        if(hasAccount(emailController.text, passwordController.text)) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BottomBarView(currentIndex: 0,)),
+          );
+        }
+        else {
+          Toast.show("Correo y/o contraseña no coinciden.", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM, backgroundColor: Colors.white, textColor: Colors.redAccent);
+        }
       },
       padding: EdgeInsets.all(12),
       color: Colors.lightBlueAccent,
@@ -81,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {}
     );
 
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -103,5 +118,25 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  //Función para agregar todas las cuentas para futura autenticación. Pues no tenemos base de datos aún
+  void addAccounts() {
+    globals.cuentas.add(Cuenta('Pedro García', 'pedro.garcia95@gmail.com', '123', DateTime.now(), 12345, 'assets/profilepic.png'));
+    globals.cuentas.add(Cuenta('Juan Pérez', 'juanperez@gmail.com', 'juanperez', DateTime.now(), 12346, 'assets/profilepic.png'));
+    globals.cuentas.add(Cuenta('Juan Pérez2', 'a', 'a', DateTime.now(), 12346, 'assets/profilepic.png'));
+  }
+
+  //Función que checa si el usuario introducido está registrado y la contraseña es correcta
+  bool hasAccount(String correo, String contrasena) {
+    //Variable que almacena con valor booleano si el usuario está o no registrado
+    bool isRegistered = false;
+
+    for(Cuenta cuenta in globals.cuentas) {
+      if(cuenta.getCorreo() == correo && cuenta.getContrasena() == contrasena) {
+        isRegistered = true;
+      }
+    }
+    return isRegistered;
   }
 }

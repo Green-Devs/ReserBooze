@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 import 'GlobalVariables.dart' as globals;
 import 'entities/Antro.dart';
 import 'entities/Reserva.dart';
@@ -53,12 +54,18 @@ class _HacerReservaState extends State<HacerReserva> {
         color: Colors.lightBlueAccent,
         child: Text('Reservar!', style : TextStyle(color: Colors.white)),
         onPressed: () {
-          Reserva res = new Reserva(antroName, hour, date);
-          globals.reservas.add(res);
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => BottomBarView(currentIndex: 1)),
-          );
+          if(fieldsAreFilled()) {
+            Reserva res = new Reserva(antroName, hour, date);
+            globals.reservas.add(res);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BottomBarView(currentIndex: 1)),
+            );
+          }
+          else {
+            Toast.show("Favor de seleccionar un día y hora.", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM, backgroundColor: Colors.white, textColor: Colors.redAccent);
+          }
         },
       ),
     );
@@ -166,4 +173,10 @@ class _HacerReservaState extends State<HacerReserva> {
     }
     return dataList;
   }
+
+  bool fieldsAreFilled() {
+    return (hour != null && date != null) ? true : false;
+  }
 }
+
+
