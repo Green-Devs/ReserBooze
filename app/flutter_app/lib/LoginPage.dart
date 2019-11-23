@@ -1,3 +1,17 @@
+/**
+ *LoginPage
+ *
+ * Primera pantalla que ve el usuario al abrir la apliación
+ * si no tiene sesión iniciada.
+ *
+ * Este archivo cumple con el caso detallado RF03: Login. El cual
+ * está especificado en el SDS. Su principal funcionalidad es verificar
+ * que correo y contraseña coincidan, para llevar la usuario a la pantalla
+ * principal.
+ * De igual manera se puede hacer click en el botón de Crear cuenta para
+ * iniciar el caso de uso RF02, el cual también está especificado en el SDS.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'BottomBarView.dart';
@@ -15,11 +29,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
 
+    //Agregar cuentas manualmente porque no tenemos base de datos todavía
     addAccounts();
 
+    //Para extrar información de los TextFormFields
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
 
+    //Creando el logo de Reserbooze
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
@@ -29,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
       )
     );
 
+    //Creando el TextFormField del correo
     final email = TextFormField(
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
@@ -42,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+    //Creando el TextFormField de la contraseña
     final password = TextFormField(
       controller: passwordController,
       autofocus: false,
@@ -55,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+  //Creando el botón de inicio de sesión
   final loginButton = Padding(
     padding: EdgeInsets.symmetric(vertical: 1.0),
     child: RaisedButton(
@@ -62,13 +82,16 @@ class _LoginPageState extends State<LoginPage> {
         borderRadius: BorderRadius.circular(24),
       ),
       onPressed: () {
+        //Verificar si la cuenta existe
         if(hasAccount(emailController.text, passwordController.text)) {
+          //Si existe, llévalo a la pantalla principal
           Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => BottomBarView(currentIndex: 0,)),
           );
         }
+        //Si no existe, dile que no coincide correo y/o contraseña
         else {
           Toast.show("Correo y/o contraseña no coinciden.", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM, backgroundColor: Colors.white, textColor: Colors.redAccent);
         }
@@ -79,12 +102,14 @@ class _LoginPageState extends State<LoginPage> {
     ),
   );
 
+    //Creando botón para crear cuentas
     final createAccountButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 1.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
+        //Te lleva directamente a otra pantalla/widget
         onPressed: () {
           Navigator.push(
             context,
@@ -99,12 +124,13 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final createAccountLabel = FlatButton(
-        child: Text('¿No tienes cuenta?', style: TextStyle(color: Colors.black54)),
-        onPressed: () {}
+    //Etiqueta que acompaña al botón para crear cuenta
+    final createAccountLabel = Text(
+      '¿No tienes cuenta?', style : TextStyle(color: Colors.black),
+      textAlign: TextAlign.center,
     );
 
-
+    //Aquí se regresa toda la pantalla/widget formado por los elementos ya descritos
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -113,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             logo,
-            //SizedBox are like padding, space between
+            //SizedBox son como padding, espacio en medio de elementos
             SizedBox(height: 48.0),
             email,
             SizedBox(height: 8.0),
@@ -129,14 +155,29 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  //Función para agregar todas las cuentas para futura autenticación. Pues no tenemos base de datos aún
+  /**
+   * addAccounts
+   *
+   * Función para agregar todas las cuentas para futura autenticación. Pues no tenemos base de datos aún.
+   */
   void addAccounts() {
     globals.cuentas.add(Cuenta('Pedro García', 'pedro.garcia95@gmail.com', '123', DateTime.now(), 12345, 'assets/profilepic.png'));
     globals.cuentas.add(Cuenta('Juan Pérez', 'juanperez@gmail.com', 'juanperez', DateTime.now(), 12346, 'assets/profilepic.png'));
     globals.cuentas.add(Cuenta('Juan Pérez2', 'a', 'a', DateTime.now(), 12346, 'assets/profilepic.png'));
   }
 
-  //Función que checa si el usuario introducido está registrado y la contraseña es correcta
+  /**
+   * hasAccount
+   *
+   * Función que checa si el usuario introducido está registrado y la contraseña es correcta
+   *
+   * Parámetros:
+   * correo: Correo introducido por el usuario
+   * contraseña: Contraseña introducida por el usuario
+   *
+   * Regresa:
+   * True si la cuenta existe, false si no.
+   */
   bool hasAccount(String correo, String contrasena) {
     //Variable que almacena con valor booleano si el usuario está o no registrado
     bool isRegistered = false;

@@ -1,8 +1,18 @@
+/**
+ * CrearCuenta.dart
+ *
+ * Widget que despliega la pantalla que usan nuestros usuarios para crear
+ * sus cuentas.
+ * Corresponde al caso de uso detallado RF02: Crear Cuenta, el cual está
+ * descrito en el SDS. Aquí el usuario ingresa los datos especificados en RF02
+ * y valida que estén correctos, que la contraseña tenga cierta seguridad,
+ * que el correo no esté registrado, etc.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-
 import 'entities/Cuenta.dart';
 import 'GlobalVariables.dart' as globals;
 
@@ -39,6 +49,7 @@ final hideText = [false, false, false, false, true];
 //Para le fecha de nacimiento se usarán otras herramientas, y no ocupamos hints o inputType, así que se pone aparte
 final dateTimeController = TextEditingController();
 
+//Formato a usar para pedir la fecha de nacimiento del usuario
 final format = DateFormat("yyyy-MM-dd");
 
 //Espacio entre cada campo de texto en el registro
@@ -53,7 +64,7 @@ class _CrearCuentaState extends State<CrearCuenta> {
       textFormFields.add(createTextFormField(controllersTextFields[i], hintsTextFields[i], inputTypeTextFields[i], hideText[i]));
     }
 
-    //Creando una imagen para visualizar el avatar del usuario
+    //Creando el logo de Reserbooze
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
@@ -63,7 +74,7 @@ class _CrearCuentaState extends State<CrearCuenta> {
       )
     );
 
-    //DateTIme
+    //El FormField para pedir la hora tiene que ser elaborarse diferente
     final dateTime = Column(
       children: <Widget>[
         Text('Fecha de nacimiento (${format.pattern})'),
@@ -117,8 +128,11 @@ class _CrearCuentaState extends State<CrearCuenta> {
               Navigator.pop(context);
             }
           }
+          //Si hay un error en formato de fecha, se evita que la aplicación crashee
           on FormatException catch(e){
 
+            //y como la fecha es la única que podría en un remoto caso,
+            //causar error. Se le dice al usuario que la fecha no es válida
             Toast.show(restriccionEdad, context, duration: Toast.LENGTH_LONG,
                 gravity: Toast.BOTTOM,
                 backgroundColor: Colors.white,
@@ -130,7 +144,7 @@ class _CrearCuentaState extends State<CrearCuenta> {
       )
     );
 
-
+    //Regresando toda la UI dentro de un Scaffold
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -159,7 +173,21 @@ class _CrearCuentaState extends State<CrearCuenta> {
     );
   }
 
-  //Method to create a Textformfield
+  /**
+   * createTextFormField
+   *
+   * Método para crear un Textformfield que no sea para fecha.
+   * Recibe los términos que cambian en cada FormField, esto con la finalidad de reutilizar código.
+   *
+   * parámetros:
+   * controller: Controller para más adelante sacar datos del textformfield siendo creado
+   * hint: Lo que se mostrará cuando no haya nada teclado
+   * textInputType: Tipo de input; correo, numérico, etc.
+   * hideText: decide si el texto se oculta o no, como en el caso de la contraseña
+   *
+   * returns:
+   * El código del TextFormField ya creado
+   */
   TextFormField createTextFormField(TextEditingController controller, String hint, TextInputType textInputType, bool hideText) {
     return TextFormField(
       controller: controller,
@@ -176,8 +204,21 @@ class _CrearCuentaState extends State<CrearCuenta> {
     );
   }
 
-  //Función para validar que la cuenta dada es válida
-  //Devuelve el string de cuentaCreada si es válida, sino un mensaje a desplegar
+  /**
+   * validateNewAccount
+   *
+   * Función para validar que la cuenta dada es válida.
+   * Devuelve el string de cuentaCreada si es válida, sino un mensaje a desplegar
+   *
+   * Parámetros:
+   * correo:  correo dado por el usuario
+   * correoConfirmacion: correo teclado por segunda vez por el usuario
+   * INE: número de INE dado por el usuario
+   * contrasena: contraseña dada por el usuario
+   *
+   * Returns:
+   * Un string a como fue especificado en la descripción de la función.
+   */
   String validateNewAccount(String correo, String correoConfirmacion, String INE, String contrasena, DateTime dateTime) {
     String message = cuentaCreada;
 
@@ -208,7 +249,9 @@ class _CrearCuentaState extends State<CrearCuenta> {
     int userAge = dateTime.year * 365 + 30 * dateTime.month + dateTime.day;
 
     //Esto representa la edad mínima (18 años)
-    int minAge = (DateTime.now().year - 18) * 365 + DateTime.now().month * 12 + DateTime.now().day;
+    int minAge = (DateTime.now().year - 18) * 365 + DateTime.now().month * 30 + DateTime.now().day;
+
+    //Si userAge es mayor significa que el usuario nació más adelante en el tiempo que "minAge"
     if( userAge > minAge) {
       message = restriccionEdad;
     }

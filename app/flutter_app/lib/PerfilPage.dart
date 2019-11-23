@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'entities/Cuenta.dart';
-import 'login_page.dart';
+import 'LoginPage.dart';
 
 class PerfilPage extends StatefulWidget {
   @override
