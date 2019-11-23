@@ -3,7 +3,9 @@
  * version 1.0
  *
  * Este archivo maneja toda la lógica de el cambio de widgets(pantallas)
- * entre las 4 pantallas principales: Home, reservaciones, antros y perfil
+ * entre las 4 pantallas principales: Home, reservaciones, antros y perfil.
+ * No corresponde a un caso en específico, solo da un contenedor para ellos y una
+ * barra de navegación.
  */
 
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ import 'entities/Reserva.dart';
 
 class BottomBarView extends StatefulWidget {
 
+  //Variables a recibir por parámetro opcionalmente en el constructor
   int calledWidget;
   int currentIndex;
   Reserva reserva;
@@ -29,9 +32,7 @@ class BottomBarView extends StatefulWidget {
 
 class _BottomBarViewState extends State<BottomBarView> {
 
-
-
-  //List of the widget. The index match the position of the icons
+  //Lista de los widgets/pantallas. El índice coincide con la posición de los íconos
   final tabs = [
     HomePage(),
     ReservasPage(),
@@ -42,25 +43,28 @@ class _BottomBarViewState extends State<BottomBarView> {
   @override
   Widget build(BuildContext context) {
 
+    //Checando si se recibió por parámetro una reserva
   if(widget.reserva != null) {
+    //Si pasó eso, agrégala a las reservas
     widget.reservas.add(widget.reserva);
     print(widget.reserva.getAntroNombre());
     widget.reserva = null;
   }
 
+    //retornando el widget con la barra de búsqueda y otro widget anidado según el caso
     return Scaffold(
 
-      //Body has the the widget(screen)
+      //Cuerpo tiene el widget anidado(la pantalla)
       body: tabs[widget.currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        //It says the index of the icon
+        //Esto es el índice seleccionado actualmente, puede ser pasado por parámetro al widget de la barra de búsqueda
         currentIndex: widget.currentIndex,
         type: BottomNavigationBarType.fixed,
         iconSize: 25,
         backgroundColor: Colors.white,
-        //The size of the font when you click on it
+          //El tamaño del texto cuando haces click en él
           selectedFontSize: 15,
-        //The size of the font when the item is unclicked
+          //El tamaño del texto cuando no se le ha hecho click
           unselectedFontSize: 12,
         items: [
           BottomNavigationBarItem(
