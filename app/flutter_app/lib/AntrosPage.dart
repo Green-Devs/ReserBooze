@@ -3,10 +3,11 @@
  * versión 1.0
  *
  * AntrosPage cubre el caso detallado RF01: Ver lista de antros,
- * el cual está especificado en el SDS.
+ * el cual está especificado en el SDS, el cual muestra como se muestran
+ * los antros al usuario en nuestra aplicación.
  *
  * Debido al tiempo que se nos otorgó para realizar el proyecto,
- * este no cuenta con una base de datos, es un prototipo de alta fidelidad.
+ * este no cuenta con una base de datos.
  * Sin embargo esto sirve como "Controlador de antros", el cual está
  * especificado en algunos casos de uso.
  */
@@ -63,8 +64,17 @@ class _AntrosPageState extends State<AntrosPage> {
   }
 
   /**
+   * buildTripCard
+   *
    * Este es el código necesario para construir una vista para
    * un antro. Cuenta con una foto, su nombre, horario y puntaje
+   *
+   * Parámetros:
+   * context: contexto de la aplicación en este instante
+   * index: Index del antro seleccionado
+   *
+   * Regresa:
+   * La Tarjeta a desplegar
    */
   Widget buildTripCard(BuildContext context, int index) {
     final antro = antroList[index];
