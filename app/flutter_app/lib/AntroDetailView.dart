@@ -6,10 +6,10 @@
  * En específico: su nombre, una foto, una descripción, horario,
  * y puntaje del 1 al 10.
  *
- * Este archivo es un avance del caso de uso "reservar mesa", su fecha
- * de entrega es en un sprint posterior, por lo que su funcionalidad y
- * componente en el SDS no están ni deberían estar completos en este momento.
- *
+ * Este archivo es una parte del caso de uso RF07: "Reservar mesa",
+ * el usuario en la lista de antros hizo click en uno para llegar a esta
+ * pantalla. Esto es el primer paso en el flujo de eventos principales del
+ * RF07.
  */
 
 
