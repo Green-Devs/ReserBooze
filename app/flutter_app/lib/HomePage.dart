@@ -12,6 +12,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/HacerPromo.dart';
 import 'entities/Antro.dart';
 import 'entities/Promo.dart';
 import 'GlobalVariables.dart' as globals;
@@ -62,8 +63,12 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            print('Clicked');
-          },),
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HacerPromo(antroList: antroList, antroSelected: antroList[0])),
+            );
+          },
+        ),
       );
     } else {
       return Container(
