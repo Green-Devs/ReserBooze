@@ -14,6 +14,7 @@
 import 'package:flutter/material.dart';
 import 'entities/Antro.dart';
 import 'entities/Promo.dart';
+import 'GlobalVariables.dart' as globals;
 
 class HomePage extends StatefulWidget {
   @override
@@ -41,22 +42,42 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //Se regresa un contenedor con un detector de gestos que contiene
     //múltiples vistas de tarjeta(card) en una listView.
-    return Scaffold(
-    body: Container(
-        child: new ListView.builder(
-          //itemCount tiene el largo de la lista de promociones
-            itemCount: promoList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                  child: buildTripCard(context, index)
-              );
-            }
-        )
-    ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () { print('Clicked'); },),
-    );
+
+    //Se utilizara para revisar si la cuenta pertenece al admin
+    final currentUser = globals.cuentaAutenticada;
+
+    if (currentUser.getNombre() == "admin") {
+      return Scaffold(
+        body: Container(
+            child: new ListView.builder(
+              //itemCount tiene el largo de la lista de promociones
+                itemCount: promoList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                      child: buildTripCard(context, index)
+                  );
+                }
+            )
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            print('Clicked');
+          },),
+      );
+    } else {
+      return Container(
+          child: new ListView.builder(
+            //itemCount tiene el largo de la lista de promociones
+              itemCount: promoList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                    child: buildTripCard(context, index)
+                );
+              }
+          )
+      );
+    }
   }
 
   /**
