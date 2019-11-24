@@ -41,7 +41,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //Se regresa un contenedor con un detector de gestos que contiene
     //múltiples vistas de tarjeta(card) en una listView.
-    return Container(
+    return Scaffold(
+    body: Container(
         child: new ListView.builder(
           //itemCount tiene el largo de la lista de promociones
             itemCount: promoList.length,
@@ -51,6 +52,10 @@ class _HomePageState extends State<HomePage> {
               );
             }
         )
+    ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () { print('Clicked'); },),
     );
   }
 
