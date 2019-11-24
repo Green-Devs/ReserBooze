@@ -183,11 +183,17 @@ class _LoginPageState extends State<LoginPage> {
     //Variable que almacena con valor booleano si el usuario está o no registrado
     bool isRegistered = false;
 
+    //Busca entre todas las cuentas
     for(Cuenta cuenta in globals.cuentas) {
+      //Si la encuentras
       if(cuenta.getCorreo() == correo && cuenta.getContrasena() == contrasena) {
         isRegistered = true;
+
+        //Ese será el usuario autenticado
+        globals.cuentaAutenticada = cuenta;
       }
     }
+    //Informa si la cuenta existe o no
     return isRegistered;
   }
 }

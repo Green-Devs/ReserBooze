@@ -17,6 +17,9 @@ List<Reserva> reservas = [];
 //Lista que almacena las cuentas de los usuarios
 List<Cuenta> cuentas = [];
 
+//Referencia al usuario atenticado
+Cuenta cuentaAutenticada = null;
+
 
 
 

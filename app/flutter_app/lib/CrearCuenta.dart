@@ -124,7 +124,10 @@ class _CrearCuentaState extends State<CrearCuenta> {
                   controllersTextFields[0].text, controllersTextFields[2].text,
                   controllersTextFields[4].text,
                   DateTime.parse(dateTimeController.text),
-                  int.parse(controllersTextFields[1].text), ""));
+                  int.parse(controllersTextFields[1].text), "assets/profilepic.png"));
+
+              //Limpiando los TextFormFields
+              clearTextFormFields();
               //Volviendo a la pantalla anterior
               Navigator.pop(context);
             }
@@ -257,5 +260,19 @@ class _CrearCuentaState extends State<CrearCuenta> {
       message = restriccionEdad;
     }
     return message;
+  }
+
+  /**
+   * clearTextFormFields
+   *
+   * Función que limpia los textos, porque si a alguien se le ocurre crear más de una cuenta
+   * seguidas, los datos no se borrarían. Pero esto le da solución.
+   */
+  void clearTextFormFields() {
+    dateTimeController.text = "";
+
+    for(TextEditingController textEditingController in controllersTextFields) {
+      textEditingController.text = "";
+    }
   }
 }

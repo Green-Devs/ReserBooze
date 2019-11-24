@@ -11,6 +11,7 @@
 import 'package:flutter/material.dart';
 import 'entities/Cuenta.dart';
 import 'LoginPage.dart';
+import 'GlobalVariables.dart' as globals;
 
 class PerfilPage extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
     //Cuenta usada para pruebas
-    final testUser = Cuenta('Pedro García', 'pedro.garcia95@gmail.com', '123', DateTime.now(), 12345, 'assets/profilepic.png');
+    final currentUser = globals.cuentaAutenticada;
 
     //Creando una imagen de avatar
     final profilePic = Hero(
@@ -29,7 +30,7 @@ class _PerfilPageState extends State<PerfilPage> {
         child: CircleAvatar(
             backgroundColor:  Colors.transparent,
             radius: 80.0,
-            child: Image.asset(testUser.getFotoCuenta())
+            child: Image.asset(currentUser.getFotoCuenta())
         )
     );
 
@@ -39,7 +40,7 @@ class _PerfilPageState extends State<PerfilPage> {
         text: 'Nombre:  ',
         style: DefaultTextStyle.of(context).style,
         children: <TextSpan>[
-          TextSpan(text: testUser.getNombre(), style: TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(text: currentUser.getNombre(), style: TextStyle(fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -50,7 +51,7 @@ class _PerfilPageState extends State<PerfilPage> {
         text: 'email:  ',
         style: DefaultTextStyle.of(context).style,
         children: <TextSpan>[
-          TextSpan(text: testUser.getCorreo(), style: TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(text: currentUser.getCorreo(), style: TextStyle(fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -61,7 +62,7 @@ class _PerfilPageState extends State<PerfilPage> {
         text: 'Fecha de Nacimiento:  ',
         style: DefaultTextStyle.of(context).style,
         children: <TextSpan>[
-          TextSpan(text: '1 de Octubre de 1996', style: TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(text: formatDate(currentUser.getFechaNacimiento()), style: TextStyle(fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -90,6 +91,10 @@ class _PerfilPageState extends State<PerfilPage> {
         color: Colors.lightBlueAccent,
         child: Text('Cerrar sesión', style : TextStyle(color: Colors.white)),
         onPressed: () {
+          //El usuario ya no estará autenticado
+          globals.cuentaAutenticada = null;
+
+          //Siendo presionado, ve a la pantalla de inicio
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LoginPage()),
@@ -118,5 +123,23 @@ class _PerfilPageState extends State<PerfilPage> {
         )
       )
     );
+  }
+
+  /**
+   * formatDate
+   *
+   * Recibe un DateTime y lo regresa formateado quitándole datos que no son
+   * relevantes del usuario.
+   *
+   * Parámetros:
+   * fechaNacimiento: fecha en que nació el usuario
+   *
+   * Regresa:
+   * La fecha con el formato deseado
+   */
+  String formatDate(DateTime fechaNacimiento) {
+    String date;
+    date = fechaNacimiento.day.toString() + "/" + fechaNacimiento.month.toString() + "/" + fechaNacimiento.year.toString();
+    return date;
   }
 }
