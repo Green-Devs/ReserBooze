@@ -165,6 +165,7 @@ class _LoginPageState extends State<LoginPage> {
     globals.cuentas.add(Cuenta('Pedro García', 'pedro.garcia95@gmail.com', '123', DateTime.now(), 12345, 'assets/profilepic.png'));
     globals.cuentas.add(Cuenta('Juan Pérez', 'juanperez@gmail.com', 'juanperez', DateTime.now(), 12346, 'assets/profilepic.png'));
     globals.cuentas.add(Cuenta('Juan Pérez2', 'a', 'a', DateTime.now(), 12346, 'assets/profilepic.png'));
+    globals.cuentas.add(Cuenta('admin', 'admin', 'admin', DateTime.now(), 12346, 'assets/profilepic.png'));
   }
 
   /**
