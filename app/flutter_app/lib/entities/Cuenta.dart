@@ -20,6 +20,8 @@ class Cuenta {
   Cuenta(this.nombre, this.correo, this.contrasena, this.fechaNacimiento, this.numeroIne, this.fotoCuenta);
 
 
+  //getters
+
   String getNombre(){
     return nombre;
   }
@@ -44,6 +46,8 @@ class Cuenta {
     return fotoCuenta;
   }
 
+  //setters
+  
   void setNombre(String nombre){
     this.nombre = nombre;
   }

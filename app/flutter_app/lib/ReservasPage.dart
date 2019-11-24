@@ -1,9 +1,10 @@
 /**
  * HomePage.dart
- * versión 1.0
+ * versión 2.0
  *
- * HomePage cubre el caso detallado RF07: Crear Reserva,
- * el cual está especificado en el SDS.
+ * En esta pestaña el usuario puede ver sus reservas que realizó
+ * en el caso de uso RF07. De hecho esta vista forma parte del último paso
+ * del RF07.
  *
  * Debido al tiempo que se nos otorgó para realizar el proyecto,
  * este no cuenta con una base de datos, es un prototipo de alta fidelidad.
@@ -17,17 +18,12 @@ import 'entities/Antro.dart';
 import 'GlobalVariables.dart' as globals;
 
 class ReservasPage extends StatefulWidget {
-  List<Reserva> reservasList = [];
-  Reserva newReserva;
-
-  ReservasPage({Key key, this.newReserva}) : super(key: key);
-
   @override
   _ReservasPageState createState() => _ReservasPageState();
 }
 
 class _ReservasPageState extends State<ReservasPage> {
-  List<Reserva> reservasL = [Reserva("Avra", "10:00 PM", "5 de Diciembre")];
+  List<Reserva> reservasL = [];
 
   //Para no escribir lo mismo 4 veces hice un string
   static final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
@@ -42,20 +38,17 @@ class _ReservasPageState extends State<ReservasPage> {
 
   @override
   Widget build(BuildContext context) {
-    
+    //Haciendo fetch de todas nuestras reservas
     for(Reserva reserva in globals.reservas){
       reservasL.add(reserva);
     }
 
-    /* Futuro uso
-    if (widget.newReserva !=  null) {
-      reservasL.add(widget.newReserva);
-    }
-    */
+    //Si hay reservas
     if (reservasL.length != null && reservasL.length > 0) {
+      //Regresa un contenedor con una lista de las reservas en forma de tarjeta
       return Container(
           child: new ListView.builder(
-            //itemCount will have the length of the list of reservas
+            //itemCount tiene el largo de la lista de reservas
               itemCount: reservasL.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
@@ -65,16 +58,19 @@ class _ReservasPageState extends State<ReservasPage> {
           )
       );
     }
+    //Si no hay reservas
     else {
+      //Crea un texto para mostrar que no hay reservas
       final noHayReservas = RichText(
         text: TextSpan(
-          text: 'Aun no haces ninguna reserva',
-          style: TextStyle(fontSize: 30.0),
+          text: 'Aun no haces ninguna reserva.',
+          style: TextStyle(fontSize: 30.0, color: Colors.lightBlueAccent),
         ),
       );
 
+      //Infórmale al usuario que no ha hecho reservas.
       return Scaffold(
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.white,
           body: Center(
               child: ListView(
                   shrinkWrap: true,
@@ -87,11 +83,18 @@ class _ReservasPageState extends State<ReservasPage> {
       );
     }
   }
-  /**
-   * Este es el código que construye las tarjetas donde estan las reservas
-   */
 
+  /**
+   * buildTripCard
+   *
+   * Código que construye cada tarjeta donde se muestra una reserva.
+   *
+   * Parámetros:
+   * context: Contexto de la aplicación justo ahora
+   * index: Índice de la reserva a desplegar en formato de tarjeta
+   */
   Widget buildTripCard(BuildContext context, int index) {
+    //Obtén la reserva a desplegar
     final reserva = reservasL[index];
     return new Container(
       child: Card(
@@ -146,8 +149,18 @@ class _ReservasPageState extends State<ReservasPage> {
       ),
     );
   }
-  
-  //Gives you the antro from its name
+
+  /**
+   * getAntroFromName
+   *
+   * Función para obtener el objeto antro a partir de su nombre
+   *
+   * Parámetros:
+   * name:  Nombre del antro
+   *
+   * Regresa:
+   * antro correspondiente al nombre name
+   */
   Antro getAntroFromName(String name) {
     Antro antroSelected;
     

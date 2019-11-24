@@ -7,9 +7,7 @@ class Promo {
   String horaFinal;
   String promocion;
 
-
   Promo(this.antro, this.horaInicio, this.horaFinal, this.promocion);
-
 
   Antro getAntro(){
     return antro;

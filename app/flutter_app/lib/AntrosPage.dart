@@ -1,6 +1,6 @@
 /**
  * AntrosPage.dart
- * versión 1.0
+ * versión 2.0
  *
  * AntrosPage cubre el caso detallado RF01: Ver lista de antros,
  * el cual está especificado en el SDS, el cual muestra como se muestran

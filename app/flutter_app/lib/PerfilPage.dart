@@ -1,3 +1,13 @@
+/**
+ * PerfilPage.dart
+ * versión 2.0
+ *
+ * Widget que le permite al usuario ver la información de su perfil.
+ * En esta vista es donde se lleva a cabo el caso de uso extendido
+ * RF04:Logout.
+ * El cual es especificado en el SDS.
+ */
+
 import 'package:flutter/material.dart';
 import 'entities/Cuenta.dart';
 import 'LoginPage.dart';
@@ -10,8 +20,10 @@ class PerfilPage extends StatefulWidget {
 class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
+    //Cuenta usada para pruebas
     final testUser = Cuenta('Pedro García', 'pedro.garcia95@gmail.com', '123', DateTime.now(), 12345, 'assets/profilepic.png');
 
+    //Creando una imagen de avatar
     final profilePic = Hero(
         tag: 'hero',
         child: CircleAvatar(
@@ -21,6 +33,7 @@ class _PerfilPageState extends State<PerfilPage> {
         )
     );
 
+    //Texto que muestra el nombre del usuario
     final name = RichText(
       text: TextSpan(
         text: 'Nombre:  ',
@@ -31,6 +44,7 @@ class _PerfilPageState extends State<PerfilPage> {
       ),
     );
 
+    //Texto que muestra el correo del usuario
     final userEmail = RichText(
       text: TextSpan(
         text: 'email:  ',
@@ -41,6 +55,7 @@ class _PerfilPageState extends State<PerfilPage> {
       ),
     );
 
+    //Texto que muestra la fecha de nacimiento del usuario
     final fechaNacimiento = RichText(
       text: TextSpan(
         text: 'Fecha de Nacimiento:  ',
@@ -51,6 +66,7 @@ class _PerfilPageState extends State<PerfilPage> {
       ),
     );
 
+    //Texto que muestra que la INE del usuario fue verificada
     final credencialVerificada = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
@@ -82,6 +98,8 @@ class _PerfilPageState extends State<PerfilPage> {
       ),
     );
 
+    //Regresando un Scaffold para que el usuario pueda ver su perfil
+    //con los elementos ya mencionados
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(

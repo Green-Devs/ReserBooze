@@ -85,13 +85,29 @@ class Antro {
 
   //Métodos que no son getters o setters
 
-  //para agregar una foto a la lista de fotos opcionales
+  /**
+   * pushFoto
+   *
+   * Función que agrega una foto a la lista de fotos opcionales
+   *
+   * Parámetros:
+   * foto:  dirección de la foto
+   */
   void pushFoto(String foto) {
     fotos.add(foto);
   }
 
-  //Te dice si se pudo eliminar la foto opcional en el index "index"
-  //Index es un número cuya cuenta empezó en 0 como primer elemento
+  /**
+   * deleteFoto
+   *
+   * Te dice si se pudo eliminar la foto opcional en el index "index"
+   *
+   * Parámetros:
+   * index: número cuya cuenta empieza en 0 como primer elemento
+   *
+   * Regresa:
+   * True si se pudo eliminar, falso si no
+   */
   bool deleteFoto(int index) {
     bool judge = false;
 

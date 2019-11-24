@@ -1,6 +1,6 @@
 /**
  * BottomBarView.dart
- * version 1.0
+ * versión 2.0
  *
  * Este archivo maneja toda la lógica de el cambio de widgets(pantallas)
  * entre las 4 pantallas principales: Home, reservaciones, antros y perfil.

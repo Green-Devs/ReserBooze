@@ -1,5 +1,6 @@
 /**
- *LoginPage
+ * LoginPage
+ * versión 2.0
  *
  * Primera pantalla que ve el usuario al abrir la apliación
  * si no tiene sesión iniciada.

@@ -1,6 +1,6 @@
 /**
  * HomePage.dart
- * versión 1.0
+ * versión 2.0
  *
  * HomePage cubre el caso detallado RF06: Ver promociones,
  * el cual está especificado en el SDS.
@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //string default a ser desplegado para describir un antro
   static final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
   //lista de antros
   static final List<Antro> antroList= [
@@ -38,10 +39,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    //Se regresa un contenedor con un detector de gestos que contiene
+    //múltiples vistas de tarjeta(card) en una listView.
     return Container(
         child: new ListView.builder(
-          //itemCount will have the length of the list of promoList
+          //itemCount tiene el largo de la lista de promociones
             itemCount: promoList.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
@@ -51,11 +53,20 @@ class _HomePageState extends State<HomePage> {
         )
     );
   }
-  /**
-   * Este es el código necesario para construir una promocion para
-   * un antro. Cuenta con una foto, su nombre, horario y la promocion
-   */
 
+  /**
+   * buildTripCard
+   *
+   * Código necesario para construir una promoción para una promoción de
+   * un antro. Cuenta con foto, nombre, horario y descripción de promoción.
+   *
+   * Parámetros:
+   * context: contexto de la aplicación en este instante
+   * index: index de la promoción a desplegar
+   *
+   * Regresa:
+   * El código para colocar la card correspondiente a la promoción
+   */
   Widget buildTripCard(BuildContext context, int index) {
     final promo = promoList[index];
     return new Container(
@@ -96,6 +107,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
+                //Este child contiene la descripción de la promoción
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Row(children: <Widget>[

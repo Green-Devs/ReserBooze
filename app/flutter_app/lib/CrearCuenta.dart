@@ -1,5 +1,6 @@
 /**
  * CrearCuenta.dart
+ * versión 2.0
  *
  * Widget que despliega la pantalla que usan nuestros usuarios para crear
  * sus cuentas.

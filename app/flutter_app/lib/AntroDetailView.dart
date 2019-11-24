@@ -1,6 +1,6 @@
 /**
  * AntroDetailView.dart
- * versión 1.0
+ * versión 2.0
  *
  * Esta clase muestra una descripción más amplia del antro.
  * En específico: su nombre, una foto, una descripción, horario,
