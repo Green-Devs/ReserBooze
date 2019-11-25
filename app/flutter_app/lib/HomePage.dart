@@ -23,22 +23,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //string default a ser desplegado para describir un antro
-  static final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-  //lista de antros
-  static final List<Antro> antroList= [
-    Antro("Strana", "10:00PM", "5:00AM", loremIpsum, "assets/strana.jpg", 10),
-    Antro("Avra", "8:00PM", "3:00AM", loremIpsum, "assets/avra.jpg", 8.9),
-    Antro("La Santa", "9:00PM", "3:33AM", loremIpsum, "assets/lasanta.jpg", 9.3),
-    Antro("Pepper", "8:30PM", "4:00AM", loremIpsum, "assets/pepper.jpg", 9.5)
-  ];
-
-  //Lista de promociones
-  final List<Promo> promoList = [
-    Promo(antroList[3], "8:00PM", "12:00AM", "MUJERES TIENEN 2X1 EN BEBIDAS"),
-    Promo(antroList[1], "10:00PM", "3:00AM", "50% DE DESCUENTO EN TEQUILA!"),
-  ];
-
   @override
   Widget build(BuildContext context) {
     //Se regresa un contenedor con un detector de gestos que contiene
@@ -52,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         body: Container(
             child: new ListView.builder(
               //itemCount tiene el largo de la lista de promociones
-                itemCount: promoList.length,
+                itemCount: globals.promociones.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                       child: buildTripCard(context, index)
@@ -65,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HacerPromo(antroList: antroList, antroSelected: antroList[0])),
+              MaterialPageRoute(builder: (context) => HacerPromo(antroList: globals.antros, antroSelected: globals.antros[0])),
             );
           },
         ),
@@ -74,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       return Container(
           child: new ListView.builder(
             //itemCount tiene el largo de la lista de promociones
-              itemCount: promoList.length,
+              itemCount: globals.promociones.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                     child: buildTripCard(context, index)
@@ -99,7 +83,7 @@ class _HomePageState extends State<HomePage> {
    * El código para colocar la card correspondiente a la promoción
    */
   Widget buildTripCard(BuildContext context, int index) {
-    final promo = promoList[index];
+    final promo = globals.promociones[index];
     return new Container(
       child: Card(
         child: Padding(

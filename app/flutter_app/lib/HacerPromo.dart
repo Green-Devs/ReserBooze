@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'GlobalVariables.dart' as globals;
 import 'entities/Antro.dart';
-import 'entities/Reserva.dart';
+import 'entities/Promo.dart';
 import 'package:flutter_app/BottomBarView.dart';
 
 class HacerPromo extends StatefulWidget {
@@ -29,18 +29,26 @@ class HacerPromo extends StatefulWidget {
 }
 
 class _HacerPromoState extends State<HacerPromo> {
-  //para almacenar el nombre del antro del que se se hace la reserva
+  //para almacenar el nombre del antro del que se se hace la promocion
   String antroName = null;
-  //para almacenar la hora a la que se hace la reserva
-  String hour = null;
-  //para almacenar el día que se hace la reserva
-  String date = null;
+
+  Antro selectedAntro = null;
+  //para almacenar la hora de incio de la promocion
+  String sHour = null;
+  //para almacenar la hora de finalizacion de la promocion
+  String eHour = null;
+  //para almacenar la descripcion de la promocion
+  String promoDesc = null;
+
   //la lista de los distintos antros disponibles
   List<DropdownMenuItem<String>> antroMenu = [];
-  //la lista de las horas disponibles para cierto antro
-  List<DropdownMenuItem<String>> hours = [];
-  //la lista de los días disponibles para cierto antro
-  List<DropdownMenuItem<String>> dates = [];
+  //la lista de las horas disponibles para empezar las promos en antros
+  List<DropdownMenuItem<String>> shours = [];
+  //la lista de las horas disponibles para acabar las promos en antros
+  List<DropdownMenuItem<String>> ehours = [];
+
+  List<DropdownMenuItem<String>> promoMenus = [];
+
   @override
   Widget build(BuildContext context) {
 
@@ -48,13 +56,17 @@ class _HacerPromoState extends State<HacerPromo> {
     if(widget.antroSelected != null) {
       antroName = widget.antroSelected.getNombre();
     }
+    selectedAntro = globals.antros[0];
+    promoDesc = "2 X 1 EN VODKA";
 
     //Agrega todos los antros disponibles a la lista
     antroMenu = loadAntroData(widget.antroList);
-    //Agrega las horas disponibles para reservación
-    hours = loadHours();
-    //Agrega los días disponibles para reservación
-    dates = loadDates();
+    //Agrega las horas disponibles para empezar promocion
+    shours = loadHours();
+    //Agrega las horas disponibles para teminar promocion
+    ehours = loadHours();
+    //Agrega las promociones a la lista de promociones
+    promoMenus = loadPromoData();
 
     //Creando el logo de Reserbooze
     final logo = Hero(
@@ -75,24 +87,24 @@ class _HacerPromoState extends State<HacerPromo> {
         ),
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
-        child: Text('Reservar!', style : TextStyle(color: Colors.white)),
+        child: Text('¡Crear promocion!', style : TextStyle(color: Colors.white)),
         onPressed: () {
           //Si se presiona y todos los campos están llenos
           if(fieldsAreFilled()) {
-            //Crea una nueva reserva
-            Reserva res = new Reserva(antroName, hour, date);
-            //agrega la reserva a la lista
-            globals.reservas.add(res);
-            //ve a la pestaña de reservas
+            //Crea una nueva promocion
+            Promo pro = new Promo(selectedAntro, sHour, eHour, promoDesc);
+            //agrega la promocion a la lista
+            globals.promociones.add(pro);
+            //ve a la pestaña de promociones
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => BottomBarView(currentIndex: 1)),
+                  builder: (context) => BottomBarView(currentIndex: 0)),
             );
           }
           //Si faltan campos de completar, notifícale al usuario
           else {
-            Toast.show("Favor de seleccionar un día y hora.", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM, backgroundColor: Colors.white, textColor: Colors.redAccent);
+            Toast.show("Favor de seleccionar ambas horas.", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM, backgroundColor: Colors.white, textColor: Colors.redAccent);
           }
         },
       ),
@@ -119,23 +131,50 @@ class _HacerPromoState extends State<HacerPromo> {
                   onChanged: (String value) {
                     setState(() {
                       antroName = value;
-                    });
+                      for (int i = 0; i < widget.antroList.length ; i++) {
+                        if (antroName == widget.antroList[i].getNombre()) {
+                          selectedAntro = widget.antroList[i];
+                        }
+                      }
+                    }
+                    );
                   },
                 )
               ],
             ),
             SizedBox(height: 48),
-            //La segunda row tiene un menú de selección para elegir el día de la reserva
-            Row(
+            //La primera row tiene un menú de selección para elegir al antro
+            Wrap(
               children: <Widget>[
-                Text("Día: "),
+                Text("Promocion: "),
                 DropdownButton<String>(
-                  value: date,
-                  items: dates,
-                  hint: Text("día"),
+                  value: promoDesc,
+                  items: promoMenus,
+                  hint: Text("antro"),
                   iconSize: 35,
                   onChanged: (String value) {
-                    date = value;
+                    setState(() {
+                      promoDesc = value;
+                    }
+                    );
+                  },
+                )
+              ],
+            ),
+            SizedBox(height: 48),
+            //La segunda row tiene un menú de selección para elegir la hora en que empieza la promocion
+            Row(
+              children: <Widget>[
+                Text("Hora para empezar: "),
+                DropdownButton<String>(
+                  value: sHour,
+                  items: shours,
+                  hint: Text("Hora inicio"),
+                  iconSize: 35,
+                  onChanged: (String value) {
+                    setState(() {
+                      sHour = value;
+                    });
                   },
                 )
               ],
@@ -144,15 +183,15 @@ class _HacerPromoState extends State<HacerPromo> {
             //La tercera row tiene un menú de selección para elegir la hora de la reserva
             Row(
               children: <Widget>[
-                Text("Hora: "),
+                Text("Hora para terminar: "),
                 DropdownButton<String>(
-                  value: hour,
-                  items: hours,
-                  hint: Text("hora"),
+                  value: eHour,
+                  items: ehours,
+                  hint: Text("Hora fin"),
                   iconSize: 35,
                   onChanged: (String value) {
                     setState(() {
-                      hour = value;
+                      eHour = value;
                     });
                   },
                 )
@@ -196,6 +235,32 @@ class _HacerPromoState extends State<HacerPromo> {
     return dataList;
   }
 
+  List<DropdownMenuItem<String>> loadPromoData() {
+    //Crear lista a regresar
+    List<DropdownMenuItem<String>> dataList = [];
+
+    //Llenar lista
+    dataList.add(new DropdownMenuItem(
+        child: Text("2 X 1 EN VODKA"),
+        value: "2 X 1 EN VODKA"
+    ));
+    dataList.add(new DropdownMenuItem(
+        child: Text("BOTELLA GRATIS EN GRUPOS DE MAS 4 PERSONAS"),
+        value: "BOTELLA GRATIS EN GRUPOS DE MAS 4 PERSONAS"
+    ));
+    dataList.add(new DropdownMenuItem(
+        child: Text("SHOTS DE TEQUILA A MITAD DE PRECIO"),
+        value: "SHOTS DE TEQUILA A MITAD DE PRECIO"
+    ));
+    dataList.add(new DropdownMenuItem(
+        child: Text("BARRA LIBRE"),
+        value: "BARRA LIBRE"
+    ));
+
+    //regresar lista
+    return dataList;
+  }
+
   /**
    * loadHours
    *
@@ -225,34 +290,6 @@ class _HacerPromoState extends State<HacerPromo> {
   }
 
   /**
-   * loadDates
-   *
-   * Función que devuelve una lista en el formato necesario con las fechas
-   * disponibles de los antros. Como aun no estamos afiliados a los antros no tenemos
-   * accesos a datos reales de disponibilidad
-   *
-   * Regresa:
-   * Una lista con el formato necesario
-   */
-  List<DropdownMenuItem<String>> loadDates() {
-    //Crea la lista a regresar
-    List<DropdownMenuItem<String>> dataList = [];
-
-    //Lista de los días de la semana
-    List<String> dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-
-    //Creando las fechas de disponibilidad
-    for(int i = 0; i < 15; i++) {
-      String innerDate = dias[i % dias.length] + " " + (i + 1).toString() + " de Diciembre";
-      dataList.add( new DropdownMenuItem(
-          child: Text(innerDate),
-          value: innerDate));
-    }
-    //Devolver la lista
-    return dataList;
-  }
-
-  /**
    * fieldsAreFilled
    *
    * Función que revisa si todos los campos para la reserva están completos o no
@@ -261,7 +298,7 @@ class _HacerPromoState extends State<HacerPromo> {
    * True si están todos llenos, false si falta al menos uno
    */
   bool fieldsAreFilled() {
-    return (hour != null && date != null) ? true : false;
+    return (eHour != null && sHour != null) ? true : false;
   }
 }
 
