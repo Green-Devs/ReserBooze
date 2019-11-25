@@ -1,13 +1,10 @@
-/**
+/***
  * HacerReserva.dart
  * versión 2.0
  * Archivo que crea un widget y permite al usuario
- * proseguir con el caso de uso RF07: Reservar mesa.
- * En este punto el usuario ya se enceuntra en el paso 2,
- * el 1 se realizó en la lista de antros. Aquí continúa y culmina
- * el caso de uso a como es explicado en el SDS.
- * Cabe mencionar que la aplicación ya le al usuario las horas que
- * están disponibles para reservación.
+ * proseguir con el caso de uso RF05: Crear promociones, el cual
+ * está especificado en el SDS
+ * Solo el admin tiene acceso a este widget
  */
 
 import 'package:flutter/material.dart';
@@ -31,7 +28,6 @@ class HacerPromo extends StatefulWidget {
 class _HacerPromoState extends State<HacerPromo> {
   //para almacenar el nombre del antro del que se se hace la promocion
   String antroName = null;
-
   Antro selectedAntro = null;
   //para almacenar la hora de incio de la promocion
   String sHour = null;
@@ -97,7 +93,7 @@ class _HacerPromoState extends State<HacerPromo> {
           }
           //Si faltan campos de completar, notifícale al usuario
           else {
-            Toast.show("Favor de seleccionar ambas horas.", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM, backgroundColor: Colors.white, textColor: Colors.redAccent);
+            Toast.show("Favor de seleccionar todos los datos.", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM, backgroundColor: Colors.white, textColor: Colors.redAccent);
           }
         },
       ),
@@ -223,11 +219,21 @@ class _HacerPromoState extends State<HacerPromo> {
           value: antros[i].getNombre()
       ));
     }
-
     //regresar lista
     return dataList;
   }
 
+
+  /**
+   * loadPromoDato
+   *
+   * Función que devuelve una lista en el formato necesario con las promociones
+   * disponibles. Como aun no estamos afiliados a los antros no tenemos
+   * accesos a datos reales de disponibilidad
+   *
+   * Regresa:
+   * Una lista con el formato necesario
+   */
   List<DropdownMenuItem<String>> loadPromoData() {
     //Crear lista a regresar
     List<DropdownMenuItem<String>> dataList = [];
