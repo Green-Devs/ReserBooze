@@ -238,12 +238,12 @@ class _HacerPromoState extends State<HacerPromo> {
         value: "2 X 1 EN VODKA"
     ));
     dataList.add(new DropdownMenuItem(
-        child: Text("BOTELLA GRATIS EN GRUPOS DE MAS 4 PERSONAS"),
-        value: "BOTELLA GRATIS EN GRUPOS DE MAS 4 PERSONAS"
+        child: Text("BOTELLA GRATIS EN GRUPO GRANDE"),
+        value: "BOTELLA GRATIS EN GRUPO GRANDE"
     ));
     dataList.add(new DropdownMenuItem(
-        child: Text("SHOTS DE TEQUILA A MITAD DE PRECIO"),
-        value: "SHOTS DE TEQUILA A MITAD DE PRECIO"
+        child: Text("SHOTS DE TEQUILA A 50%"),
+        value: "SHOTS DE TEQUILA A 50%"
     ));
     dataList.add(new DropdownMenuItem(
         child: Text("BARRA LIBRE"),
@@ -291,7 +291,7 @@ class _HacerPromoState extends State<HacerPromo> {
    * True si están todos llenos, false si falta al menos uno
    */
   bool fieldsAreFilled() {
-    return (eHour != null && sHour != null) ? true : false;
+    return (eHour != null && sHour != null && selectedAntro != null && promoDesc != null) ? true : false;
   }
 }
 
