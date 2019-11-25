@@ -1,13 +1,12 @@
 /**
- * CrearCuenta.dart
- * versión 2.0
+ * EditarPerfil.dart
+ * versión 1.0
  *
- * Widget que despliega la pantalla que usan nuestros usuarios para crear
- * sus cuentas.
- * Corresponde al caso de uso detallado RF02: Crear Cuenta, el cual está
- * descrito en el SDS. Aquí el usuario ingresa los datos especificados en RF02
- * y valida que estén correctos, que la contraseña tenga cierta seguridad,
- * que el correo no esté registrado, etc.
+ * Widget que despliega la pantalla que usan nuestros usuarios para editar
+ * su cuenta.
+ * Corresponde al caso de uso detallado RF09: Editar Perfiles, el cual está
+ * descrito en el SDS. Aquí el usuario ingresa los datos especificados en RF09
+ * y valida que los datos modificados estén correctos.
  */
 
 import 'package:flutter/material.dart';
@@ -28,15 +27,15 @@ class EditarPerfil extends StatefulWidget {
   _EditarPerfilState createState() => _EditarPerfilState();
 }
 
-//Creando posibles mensajes de fallos al crear una cuenta
+//Creando posibles mensajes de fallos al modificar una cuenta
 final String correoRegistrado = "El correo ya está registrado.";
 final String ineInvalida = "INE no válida.";
 final String contrasenaCorta = "Tu contraseña debe tener 5 o más dígitos.";
 final String correoIncorrecto = "Verifique su correo electrónico.";
 final String restriccionEdad = "Ocupas mínimo 18 años.";
 
-//Creando mensaje de éxito al crear la cuenta
-final String cuentaCreada = "¡Cuenta modificada!";
+//Creando mensaje de éxito al modificar la cuenta
+final String cuentaModificada = "¡Cuenta modificada!";
 
 //Array que almacenará todos los TextFormFields
 final textFormFields = [];
@@ -107,7 +106,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
       ],
     );
 
-    //Creando el botón para crear una cuenta
+    //Creando el botón para modificar una cuenta
     final createAccountButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 1.0),
       child: RaisedButton(
@@ -116,7 +115,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
         ),
         onPressed: () {
           try {
-            String message = validateNewAccount(
+            String message = validateModifiedAccount(
                 controllersTextFields[2].text, controllersTextFields[3].text,
                 controllersTextFields[1].text, controllersTextFields[4].text,
                 DateTime.parse(dateTimeController.text));
@@ -131,8 +130,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
                 DateTime.parse(dateTimeController.text),
                 int.parse(controllersTextFields[1].text), "assets/profilepic.png");
 
-            if (message == cuentaCreada) {
-              //Agregando cuenta a la lista de cuentas
+            if (message == cuentaModificada) {
+              //Modificando cuenta a la lista de cuentas
               for (int i = 0; i < globals.cuentas.length; i++) {
                 if (oAccount == globals.cuentas[i]) {
                   globals.cuentas[i] = mAccount;
@@ -223,10 +222,10 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   /**
-   * validateNewAccount
+   * validateModifiedAccount
    *
    * Función para validar que la cuenta dada es válida.
-   * Devuelve el string de cuentaCreada si es válida, sino un mensaje a desplegar
+   * Devuelve el string de cuentaModificada si es válida, sino un mensaje a desplegar
    *
    * Parámetros:
    * correo:  correo dado por el usuario
@@ -237,8 +236,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
    * Returns:
    * Un string a como fue especificado en la descripción de la función.
    */
-  String validateNewAccount(String correo, String correoConfirmacion, String INE, String contrasena, DateTime dateTime) {
-    String message = cuentaCreada;
+  String validateModifiedAccount(String correo, String correoConfirmacion, String INE, String contrasena, DateTime dateTime) {
+    String message = cuentaModificada;
 
     //Validando que el correo no esté registrado
     for(Cuenta cuenta in globals.cuentas) {
