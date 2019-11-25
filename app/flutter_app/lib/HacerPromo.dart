@@ -52,13 +52,6 @@ class _HacerPromoState extends State<HacerPromo> {
   @override
   Widget build(BuildContext context) {
 
-    //Solo obtén el antro seleccionado si se mandó como parámetro
-    if(widget.antroSelected != null) {
-      antroName = widget.antroSelected.getNombre();
-    }
-    selectedAntro = globals.antros[0];
-    promoDesc = "2 X 1 EN VODKA";
-
     //Agrega todos los antros disponibles a la lista
     antroMenu = loadAntroData(widget.antroList);
     //Agrega las horas disponibles para empezar promocion
