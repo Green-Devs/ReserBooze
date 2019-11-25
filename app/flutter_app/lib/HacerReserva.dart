@@ -1,8 +1,10 @@
 /**
  * HacerReserva.dart
  * versión 2.0
+ * 
  * Archivo que crea un widget y permite al usuario
  * proseguir con el caso de uso RF07: Reservar mesa.
+ * 
  * En este punto el usuario ya se enceuntra en el paso 2,
  * el 1 se realizó en la lista de antros. Aquí continúa y culmina
  * el caso de uso a como es explicado en el SDS.
