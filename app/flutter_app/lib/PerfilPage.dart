@@ -9,6 +9,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/EditarPerfil.dart';
 import 'entities/Cuenta.dart';
 import 'LoginPage.dart';
 import 'GlobalVariables.dart' as globals;
@@ -121,6 +122,15 @@ class _PerfilPageState extends State<PerfilPage> {
               logoutButton
             ]
         )
+      ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.create),
+          onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EditarPerfil(originalAccount: currentUser)),
+          );
+        },
       )
     );
   }
